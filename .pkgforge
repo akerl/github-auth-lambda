@@ -1,0 +1,30 @@
+name 'github-auth-lambda'
+org 'akerl'
+
+source(
+  type: 'git',
+  path: '.'
+)
+
+build do
+  run 'make local'
+  run 'cp ./bin/madlibrarian-lambda_linux ./main'
+  run 'zip payload.zip ./main'
+  cp 'payload.zip'
+end
+
+package(
+  type: 'file',
+  artifacts: [
+    {
+      source: 'payload.zip',
+      name: 'payload.zip'
+      source: "bin/#{@forge.name}_darwin",
+      name: "#{@forge.name}_darwin"
+    }
+  ]
+)
+
+test do
+  # TODO: add tests
+end

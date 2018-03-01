@@ -1,0 +1,20 @@
+machine:
+  services:
+  - docker
+  environment:
+    PKGFORGE_STATEFILE: '/tmp/pkgforge'
+dependencies:
+  override:
+  - git submodule update --init --recursive
+  - git fetch --tags origin
+test:
+  override:
+  - make
+  post:
+  - cp -r pkg/* $CIRCLE_ARTIFACTS/
+deployment:
+  release:
+    tag: /.*/
+    commands:
+    - make release
+    - 'aws s3 cp $CIRCLE_ARTIFACTS/payload.zip "s3://akerl-github-auth-lambda/lambdas/payload-$CIRCLE_TAG.zip"'
