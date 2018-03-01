@@ -8,7 +8,7 @@ source(
 
 build do
   run 'make local'
-  run 'cp ./bin/madlibrarian-lambda_linux ./main'
+  run 'cp ./bin/github-auth-lambda_linux ./main'
   run 'zip payload.zip ./main'
   cp 'payload.zip'
 end
