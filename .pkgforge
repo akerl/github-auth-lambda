@@ -19,8 +19,6 @@ package(
     {
       source: 'payload.zip',
       name: 'payload.zip'
-      source: "bin/#{@forge.name}_darwin",
-      name: "#{@forge.name}_darwin"
     }
   ]
 )
