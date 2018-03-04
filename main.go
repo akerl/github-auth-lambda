@@ -11,7 +11,7 @@ import (
 var debugRegex = regexp.MustCompile(`^/debug$`)
 var authRegex = regexp.MustCompile(`^/auth$`)
 var callbackRegex = regexp.MustCompile(`^/callback$`)
-var indexRegex = regexp.MustCompile(`^/`)
+var indexRegex = regexp.MustCompile(`^/$`)
 var defaultRegex = regexp.MustCompile(`.*`)
 
 func debugHandler(req events.Request) (events.Response, error) {
