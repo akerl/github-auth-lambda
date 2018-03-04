@@ -2,6 +2,15 @@
 
 
 [[projects]]
+  name = "github.com/akerl/go-lambda"
+  packages = [
+    "apigw/events",
+    "apigw/router"
+  ]
+  revision = "015eca41d013e4fa253a1652ce0477febeb72552"
+  version = "0.0.1"
+
+[[projects]]
   name = "github.com/aws/aws-lambda-go"
   packages = [
     "events",
@@ -15,6 +24,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "c065e48ca2166602e725613ecbb6e86249e53e82452feeb3b77c6c03c71b21e1"
+  inputs-digest = "49c3c7b6babac9f1b557ce23353b3bb70d157bd5894e479f4e965ba3ff662132"
   solver-name = "gps-cdcl"
   solver-version = 1
