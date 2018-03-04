@@ -7,8 +7,8 @@
     "apigw/events",
     "apigw/router"
   ]
-  revision = "015eca41d013e4fa253a1652ce0477febeb72552"
-  version = "0.0.1"
+  revision = "cb0b8dfc9c008a603f6e95cdb8fb4f339ec3ce7c"
+  version = "0.0.2"
 
 [[projects]]
   name = "github.com/aws/aws-lambda-go"

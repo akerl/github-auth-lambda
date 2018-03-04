@@ -12,7 +12,7 @@ var debugRegex = regexp.MustCompile(`^/debug$`)
 var authRegex = regexp.MustCompile(`^/auth$`)
 var callbackRegex = regexp.MustCompile(`^/callback$`)
 var indexRegex = regexp.MustCompile(`^/$`)
-var defaultRegex = regexp.MustCompile(`.*`)
+var defaultRegex = regexp.MustCompile(`/.*`)
 
 func debugHandler(req events.Request) (events.Response, error) {
 	return events.Succeed(fmt.Sprintf("%+v\n", req))
@@ -31,7 +31,12 @@ func indexHandler(req events.Request) (events.Response, error) {
 }
 
 func defaultHandler(req events.Request) (events.Response, error) {
-	return events.Succeed(fmt.Sprintf("Catch-all: %s", req.Path))
+	return events.Response{
+		StatusCode: 303,
+		Headers: map[string]string{
+			"Location": "https://" + req.Headers["Host"],
+		},
+	}, nil
 }
 
 func main() {
