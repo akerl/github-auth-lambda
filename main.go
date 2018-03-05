@@ -228,11 +228,22 @@ func main() {
 		return
 	}
 
+	signKey, err := base64.URLEncoding.DecodeString(config.SignKey)
+	if err != nil {
+		log.Print(err)
+		return
+	}
+	encKey, err := base64.URLEncoding.DecodeString(config.EncKey)
+	if err != nil {
+		log.Print(err)
+		return
+	}
+
 	sm = &sessionManager{
 		Name: "session",
 		Codec: securecookie.New(
-			[]byte(config.SignKey),
-			[]byte(config.EncKey),
+			signKey,
+			encKey,
 		),
 	}
 
