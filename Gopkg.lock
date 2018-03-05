@@ -8,8 +8,8 @@
     "apigw/router",
     "s3"
   ]
-  revision = "47bcffaa3735d9abe36ca9cecf6101f9bc88d6e9"
-  version = "0.0.3"
+  revision = "f49449a81081d810597f99872a554d7b41e088e1"
+  version = "0.0.4"
 
 [[projects]]
   name = "github.com/aws/aws-lambda-go"

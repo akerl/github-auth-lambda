@@ -1,10 +1,12 @@
 package main
 
 import (
+	"context"
 	"crypto/rand"
 	"encoding/base64"
 	"fmt"
 	"log"
+	"net/http"
 	"os"
 	"regexp"
 
@@ -17,11 +19,64 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
+// TODO: Clean up error messages / logging
+// TODO: Return useful HTTP error codes for failure
+
 type configFile struct {
 	ClientSecret string `json:"clientsecret"`
 	ClientID     string `json:"clientid"`
 	SignKey      string `json:"signkey"`
 	EncKey       string `json:"enckey"`
+}
+
+type sessionManager struct {
+	Name  string
+	Codec securecookie.Codec
+}
+
+type session struct {
+	Nonce string   `json:"state"`
+	Token string   `json:"token"`
+	Login string   `json:"login"`
+	Orgs  []string `json:"orgs"`
+}
+
+func (sc *sessionManager) Read(req events.Request) (session, error) {
+	sess := session{}
+
+	header := http.Header{}
+	header.Add("Cookie", req.Headers["Cookie"])
+	request := http.Request{Header: header}
+	cookie, err := request.Cookie(sm.Name)
+	if err == http.ErrNoCookie {
+		return sess, nil
+	} else if err != nil {
+		return sess, fmt.Errorf("failed to read cookie")
+	}
+
+	err = sc.Codec.Decode(sm.Name, cookie.Value, &sess)
+	if err != nil {
+		log.Print("failed to decode cookie")
+	}
+	return sess, err
+}
+
+func (sc *sessionManager) Write(sess session) (string, error) {
+	encoded, err := sc.Codec.Encode(sm.Name, sess)
+	if err != nil {
+		return "", err
+	}
+
+	// TODO: Set expiration time / max age
+	// TODO: Set domain field
+	cookie := &http.Cookie{
+		Name:     sm.Name,
+		Value:    encoded,
+		Path:     "/",
+		Secure:   true,
+		HttpOnly: true,
+	}
+	return cookie.String(), nil
 }
 
 const (
@@ -31,10 +86,10 @@ const (
 )
 
 var (
-	config        *configFile
-	cookieManager *securecookie.SecureCookie
-	oauthCfg      *oauth2.Config
-	scopes        = []string{"read:org"}
+	config   *configFile
+	sm       *sessionManager
+	oauthCfg *oauth2.Config
+	scopes   = []string{"read:org"}
 
 	authRegex     = regexp.MustCompile(`^/auth$`)
 	callbackRegex = regexp.MustCompile(`^/callback$`)
@@ -43,58 +98,98 @@ var (
 )
 
 func authHandler(req events.Request) (events.Response, error) {
+	// TODO: Don't auth if already valid creds
 	b := make([]byte, 16)
 	rand.Read(b)
+	nonce := base64.URLEncoding.EncodeToString(b)
 
-	state := base64.URLEncoding.EncodeToString(b)
+	sess, err := sm.Read(req)
+	if err != nil {
+		log.Printf("Failed loading session cookie: %s", err)
+		return events.Fail("error; aborting")
+	}
 
-	session, _ := store.Get(hr, "sess")
-	session.Values["state"] = state
-	session.Save(r, w)
+	sess.Nonce = nonce
+	cookie, err := sm.Write(sess)
+	if err != nil {
+		log.Printf("Failed writing session cookie: %s", err)
+		return events.Fail("error; aborting")
+	}
+	url := oauthCfg.AuthCodeURL(nonce)
 
-	url := oauthCfg.AuthCodeURL(state)
-	http.Redirect(w, r, url, 302)
-	return events.Succeed("Auth!")
+	return events.Response{
+		StatusCode: 303,
+		Headers: map[string]string{
+			"Location":   url,
+			"Set-Cookie": cookie,
+		},
+	}, nil
 }
 
 func callbackHandler(req events.Request) (events.Response, error) {
-	session, err := store.Get(r, "sess")
+	// TODO: Break this method apart
+	errorRedirect, _ := events.Redirect("https://"+req.Headers["Host"], 303)
+
+	sess, err := sm.Read(req)
 	if err != nil {
-		fmt.Fprintln(w, "aborted")
-		return
+		log.Printf("Failed loading session cookie: %s", err)
+		return events.Fail("error; aborting")
 	}
 
-	if r.URL.Query().Get("state") != session.Values["state"] {
-		fmt.Fprintln(w, "no state match; possible csrf OR cookies not enabled")
-		return
+	actual := req.QueryStringParameters["state"]
+
+	if sess.Nonce == "" {
+		log.Print("callback hit with no nonce")
+		return errorRedirect, nil
+	} else if sess.Nonce != actual {
+		log.Print("nonce mismatch; possible csrf OR cookies not enabled")
+		return errorRedirect, nil
 	}
 
-	tkn, err := oauthCfg.Exchange(oauth2.NoContext, r.URL.Query().Get("code"))
+	code := req.QueryStringParameters["code"]
+	token, err := oauthCfg.Exchange(oauth2.NoContext, code)
 	if err != nil {
-		fmt.Fprintln(w, "there was an issue getting your token")
-		return
+		log.Print("there was an issue getting your token")
+		return errorRedirect, nil
 	}
 
-	if !tkn.Valid() {
-		fmt.Fprintln(w, "retreived invalid token")
-		return
+	if !token.Valid() {
+		log.Print("retreived invalid token")
+		return errorRedirect, nil
 	}
 
-	client := github.NewClient(oauthCfg.Client(oauth2.NoContext, tkn))
-
-	user, _, err := client.Users.Get("")
+	client := github.NewClient(oauthCfg.Client(oauth2.NoContext, token))
+	user, _, err := client.Users.Get(context.Background(), "")
 	if err != nil {
-		fmt.Println(w, "error getting name")
-		return
+		log.Print("error getting name")
+		return errorRedirect, nil
+	}
+	orgs, _, err := client.Organizations.List(context.Background(), "", &github.ListOptions{})
+	if err != nil {
+		log.Print("error getting orgs")
+		return errorRedirect, nil
+	}
+	var orgList []string
+	for _, i := range orgs {
+		orgList = append(orgList, *i.Login)
 	}
 
-	session.Values["name"] = user.Name
-	session.Values["accessToken"] = tkn.AccessToken
-	session.Save(r, w)
+	sess.Token = token.AccessToken
+	sess.Login = *user.Name
+	sess.Orgs = orgList
 
-	http.Redirect(w, r, "/", 302)
-
-	return events.Succeed("Callback!")
+	cookie, err := sm.Write(sess)
+	if err != nil {
+		log.Print("error encoding cookie")
+		return errorRedirect, nil
+	}
+	return events.Response{
+		StatusCode: 303,
+		Headers: map[string]string{
+			"Location":   "https://" + req.Headers["Host"],
+			"Set-Cookie": cookie,
+		},
+	}, nil
 }
 
 func indexHandler(req events.Request) (events.Response, error) {
@@ -106,12 +201,7 @@ func indexHandler(req events.Request) (events.Response, error) {
 }
 
 func defaultHandler(req events.Request) (events.Response, error) {
-	return events.Response{
-		StatusCode: 303,
-		Headers: map[string]string{
-			"Location": "https://" + req.Headers["Host"],
-		},
-	}, nil
+	return events.Redirect("https://"+req.Headers["Host"], 303)
 }
 
 func loadConfig() {
@@ -140,10 +230,13 @@ func loadConfig() {
 func main() {
 	loadConfig()
 
-	cookieManager = securecookie.New(
-		[]byte(config.SignKey),
-		[]byte(config.EncKey),
-	)
+	sm = &sessionManager{
+		Name: "session",
+		Codec: securecookie.New(
+			[]byte(config.SignKey),
+			[]byte(config.EncKey),
+		),
+	}
 
 	oauthCfg = &oauth2.Config{
 		ClientID:     config.ClientID,
