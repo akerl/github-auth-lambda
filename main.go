@@ -128,8 +128,6 @@ func authHandler(req events.Request) (events.Response, error) {
 
 func callbackHandler(req events.Request) (events.Response, error) {
 	// TODO: Break this method apart
-	errorRedirect, _ := events.Redirect("https://"+req.Headers["Host"], 303)
-
 	sess, err := sm.Read(req)
 	if err != nil {
 		log.Printf("Failed loading session cookie: %s", err)
@@ -140,34 +138,34 @@ func callbackHandler(req events.Request) (events.Response, error) {
 
 	if sess.Nonce == "" {
 		log.Print("callback hit with no nonce")
-		return errorRedirect, nil
+		return events.Redirect("https://"+req.Headers["Host"], 303)
 	} else if sess.Nonce != actual {
 		log.Print("nonce mismatch; possible csrf OR cookies not enabled")
-		return errorRedirect, nil
+		return events.Fail("error; aborting")
 	}
 
 	code := req.QueryStringParameters["code"]
 	token, err := oauthCfg.Exchange(oauth2.NoContext, code)
 	if err != nil {
 		log.Print("there was an issue getting your token")
-		return errorRedirect, nil
+		return events.Fail("error; aborting")
 	}
 
 	if !token.Valid() {
 		log.Print("retreived invalid token")
-		return errorRedirect, nil
+		return events.Fail("error; aborting")
 	}
 
 	client := github.NewClient(oauthCfg.Client(oauth2.NoContext, token))
 	user, _, err := client.Users.Get(context.Background(), "")
 	if err != nil {
 		log.Print("error getting name")
-		return errorRedirect, nil
+		return events.Fail("error; aborting")
 	}
 	orgs, _, err := client.Organizations.List(context.Background(), "", &github.ListOptions{})
 	if err != nil {
 		log.Print("error getting orgs")
-		return errorRedirect, nil
+		return events.Fail("error; aborting")
 	}
 	var orgList []string
 	for _, i := range orgs {
@@ -181,7 +179,7 @@ func callbackHandler(req events.Request) (events.Response, error) {
 	cookie, err := sm.Write(sess)
 	if err != nil {
 		log.Print("error encoding cookie")
-		return errorRedirect, nil
+		return events.Fail("error; aborting")
 	}
 	return events.Response{
 		StatusCode: 303,
@@ -196,7 +194,6 @@ func indexHandler(req events.Request) (events.Response, error) {
 	// TODO: use nicer homepage template
 	// TODO: Show if you're already auth'd
 	// TODO: Show link to auth page
-	//return events.Succeed("Index!")
 	return events.Succeed(fmt.Sprintf("%+v\n", req))
 }
 
@@ -204,31 +201,32 @@ func defaultHandler(req events.Request) (events.Response, error) {
 	return events.Redirect("https://"+req.Headers["Host"], 303)
 }
 
-func loadConfig() {
+func loadConfig() (*configFile, error) {
+	c := configFile{}
+
 	bucket := os.Getenv("S3_BUCKET")
 	path := os.Getenv("S3_KEY")
 	if bucket == "" || path == "" {
-		log.Print("variables not provided")
-		return
+		return &c, fmt.Errorf("variables not provided")
 	}
 
 	obj, err := s3.GetObject(bucket, path)
 	if err != nil {
-		log.Print(err)
-		return
+		return &c, err
 	}
 
-	c := configFile{}
 	err = yaml.Unmarshal(obj, &c)
+	return &c, err
+}
+
+func main() {
+	var err error
+
+	config, err = loadConfig()
 	if err != nil {
 		log.Print(err)
 		return
 	}
-	config = &c
-}
-
-func main() {
-	loadConfig()
 
 	sm = &sessionManager{
 		Name: "session",
