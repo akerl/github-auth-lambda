@@ -53,8 +53,8 @@
     "service/s3",
     "service/sts"
   ]
-  revision = "1f8fb9d0919e5a58992207db9512a03f76ab0274"
-  version = "v1.13.12"
+  revision = "28d0127967e59b0c41cede1e8d548ed85374bbbc"
+  version = "v1.13.14"
 
 [[projects]]
   name = "github.com/go-ini/ini"
@@ -98,7 +98,7 @@
     "context",
     "context/ctxhttp"
   ]
-  revision = "ae89d30ce0c63142b652837da33d782e2b0a9b25"
+  revision = "e0c57d8f86c17f0724497efcb3bc617e82834821"
 
 [[projects]]
   branch = "master"
@@ -107,7 +107,7 @@
     ".",
     "internal"
   ]
-  revision = "7af32f14d0a25aec7873e0683e8e48dcead159a8"
+  revision = "fdc9e635145ae97e6c2cb777c48305600cf515cb"
 
 [[projects]]
   name = "google.golang.org/appengine"
