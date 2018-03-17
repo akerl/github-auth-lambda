@@ -8,8 +8,8 @@
     "apigw/router",
     "s3"
   ]
-  revision = "656b965f85139d7793dd03dab54503eefd205fe0"
-  version = "0.0.9"
+  revision = "972b51e60a0dd1d2fd1606567553333b2689dd89"
+  version = "0.0.10"
 
 [[projects]]
   name = "github.com/aws/aws-lambda-go"
@@ -53,8 +53,8 @@
     "service/s3",
     "service/sts"
   ]
-  revision = "62465d4996f172ae426fdcec7a6a053062cf8995"
-  version = "v1.13.15"
+  revision = "f0872da8a448f8cb10f4f0c95c2100e4f7356448"
+  version = "v1.13.16"
 
 [[projects]]
   name = "github.com/go-ini/ini"
