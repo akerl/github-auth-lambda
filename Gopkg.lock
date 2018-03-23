@@ -53,8 +53,8 @@
     "service/s3",
     "service/sts"
   ]
-  revision = "f0872da8a448f8cb10f4f0c95c2100e4f7356448"
-  version = "v1.13.16"
+  revision = "c0ea8ae46aeed5902eeebe10d0d5cdf54b258526"
+  version = "v1.13.19"
 
 [[projects]]
   name = "github.com/go-ini/ini"
@@ -98,7 +98,7 @@
     "context",
     "context/ctxhttp"
   ]
-  revision = "92b859f39abd2d91a854c9f9c4621b2f5054a92d"
+  revision = "6078986fec03a1dcc236c34816c71b0e05018fda"
 
 [[projects]]
   branch = "master"
