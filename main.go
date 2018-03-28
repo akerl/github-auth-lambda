@@ -194,7 +194,7 @@ func indexHandler(req events.Request) (events.Response, error) {
 	// TODO: use nicer homepage template
 	// TODO: Show if you're already auth'd
 	// TODO: Show link to auth page
-	return events.Succeed(fmt.Sprintf("%+v\n", req))
+	return events.Succeed("Hello!")
 }
 
 func defaultHandler(req events.Request) (events.Response, error) {
