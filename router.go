@@ -1,4 +1,4 @@
-//go:generate fileb0x box.yaml
+//go:generate resources -output static/main.go -package static -fmt -trim ./assets/ ./assets/*
 package main
 
 import (

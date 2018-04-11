@@ -2,5 +2,5 @@
 
 set -xeuo pipefail
 
-go get github.com/UnnoTed/fileb0x
+go get github.com/omeid/go-resources/cmd/resources
 go generate
