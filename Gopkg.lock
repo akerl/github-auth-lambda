@@ -53,8 +53,8 @@
     "service/s3",
     "service/sts"
   ]
-  revision = "61ac2e639a3e5f940b62693f2f1db515e4f0325e"
-  version = "v1.13.30"
+  revision = "9b0098a71f6d4d473a26ec8ad3c2feaac6eb1da6"
+  version = "v1.13.32"
 
 [[projects]]
   name = "github.com/go-ini/ini"
@@ -105,6 +105,7 @@
   name = "golang.org/x/oauth2"
   packages = [
     ".",
+    "github",
     "internal"
   ]
   revision = "921ae394b9430ed4fb549668d7b087601bd60a81"
@@ -132,6 +133,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "d680ac8fc73ab02fa5835afa4340d217e71ddca7b875f169b33d5317011feac3"
+  inputs-digest = "39b3ce5e584ea399f95d6ac3313a531f23ef055ab6a966be46e85a901dac9583"
   solver-name = "gps-cdcl"
   solver-version = 1

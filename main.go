@@ -16,11 +16,13 @@ import (
 	"github.com/google/go-github/github"
 	"github.com/gorilla/securecookie"
 	"golang.org/x/oauth2"
+	githubOauth "golang.org/x/oauth2/github"
 	"gopkg.in/yaml.v2"
 )
 
 // TODO: Clean up error messages / logging
 // TODO: Return useful HTTP error codes for failure
+// TODO: Review error leakage to front/backends
 
 type configFile struct {
 	ClientSecret string `json:"clientsecret"`
@@ -51,12 +53,12 @@ func (sc *sessionManager) Read(req events.Request) (session, error) {
 	if err == http.ErrNoCookie {
 		return sess, nil
 	} else if err != nil {
-		return sess, fmt.Errorf("failed to read cookie")
+		return sess, fmt.Errorf("failed to read cookie: %s", err)
 	}
 
 	err = sc.Codec.Decode(sm.Name, cookie.Value, &sess)
 	if err != nil {
-		log.Print("failed to decode cookie")
+		log.Printf("failed to decode cookie: %s", err)
 	}
 	return sess, err
 }
@@ -80,9 +82,7 @@ func (sc *sessionManager) Write(sess session) (string, error) {
 }
 
 const (
-	githubAuthorizeURL = "https://github.com/login/oauth/authorize"
-	githubTokenURL     = "https://github.com/login/oauth/access_token"
-	redirectURL        = ""
+	redirectURL = ""
 )
 
 var (
@@ -94,7 +94,9 @@ var (
 	authRegex     = regexp.MustCompile(`^/auth$`)
 	callbackRegex = regexp.MustCompile(`^/callback$`)
 	indexRegex    = regexp.MustCompile(`^/$`)
-	defaultRegex  = regexp.MustCompile(`/.*`)
+	// TODO: Handle favicon
+	faviconRegex = regexp.MustCompile(`/favicon.ico`)
+	defaultRegex = regexp.MustCompile(`/.*`)
 )
 
 func authHandler(req events.Request) (events.Response, error) {
@@ -147,7 +149,7 @@ func callbackHandler(req events.Request) (events.Response, error) {
 	code := req.QueryStringParameters["code"]
 	token, err := oauthCfg.Exchange(oauth2.NoContext, code)
 	if err != nil {
-		log.Print("there was an issue getting your token")
+		log.Printf("there was an issue getting your token: %s", err)
 		return events.Fail("error; aborting")
 	}
 
@@ -159,7 +161,7 @@ func callbackHandler(req events.Request) (events.Response, error) {
 	client := github.NewClient(oauthCfg.Client(oauth2.NoContext, token))
 	user, _, err := client.Users.Get(context.Background(), "")
 	if err != nil {
-		log.Print("error getting name")
+		log.Printf("error getting name: %s", err)
 		return events.Fail("error; aborting")
 	}
 	orgs, _, err := client.Organizations.List(context.Background(), "", &github.ListOptions{})
@@ -197,6 +199,10 @@ func indexHandler(req events.Request) (events.Response, error) {
 	return events.Succeed("Hello!")
 }
 
+func missingHandler(_ events.Request) (events.Response, error) {
+	return events.Respond(404, "Resource does not exist")
+}
+
 func defaultHandler(req events.Request) (events.Response, error) {
 	return events.Redirect("https://"+req.Headers["Host"], 303)
 }
@@ -216,6 +222,7 @@ func loadConfig() (*configFile, error) {
 	}
 
 	err = yaml.Unmarshal(obj, &c)
+	// TODO: Validate that client ID/Secret are set
 	return &c, err
 }
 
@@ -250,12 +257,9 @@ func main() {
 	oauthCfg = &oauth2.Config{
 		ClientID:     config.ClientID,
 		ClientSecret: config.ClientSecret,
-		Endpoint: oauth2.Endpoint{
-			AuthURL:  githubAuthorizeURL,
-			TokenURL: githubTokenURL,
-		},
-		RedirectURL: redirectURL,
-		Scopes:      scopes,
+		Endpoint:     githubOauth.Endpoint,
+		RedirectURL:  redirectURL,
+		Scopes:       scopes,
 	}
 
 	r := router.Router{
@@ -263,6 +267,7 @@ func main() {
 			router.Route{Path: authRegex, Handler: authHandler},
 			router.Route{Path: callbackRegex, Handler: callbackHandler},
 			router.Route{Path: indexRegex, Handler: indexHandler},
+			router.Route{Path: faviconRegex, Handler: missingHandler},
 			router.Route{Path: defaultRegex, Handler: defaultHandler},
 		},
 	}
