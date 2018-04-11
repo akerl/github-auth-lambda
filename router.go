@@ -1,9 +1,12 @@
+//go:generate fileb0x box.yaml
 package main
 
 import (
 	"context"
 	"fmt"
 	"log"
+
+	"github.com/akerl/github-auth-lambda/static"
 
 	"github.com/akerl/go-lambda/apigw/events"
 	"github.com/google/go-github/github"
@@ -61,8 +64,11 @@ func indexHandler(req events.Request) (events.Response, error) {
 }
 
 func faviconHandler(req events.Request) (events.Response, error) {
-	// TODO: Return a real favicon
-	return missingHandler(req)
+	favicon, err := static.ReadFile("favicon.ico")
+	if err != nil {
+		return missingHandler(req)
+	}
+	return events.Succeed(string(favicon))
 }
 
 func missingHandler(_ events.Request) (events.Response, error) {

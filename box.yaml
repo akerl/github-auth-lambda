@@ -1,0 +1,7 @@
+pkg: static
+dest: ./static/
+fmt: true
+custom:
+- files: 
+  - ./assets/
+  base: ./assets/
