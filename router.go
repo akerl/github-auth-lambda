@@ -1,12 +1,10 @@
-//go:generate resources -output static/main.go -package static -fmt -trim ./assets/ ./assets/*
+//go:generate resources -output static.go -fmt -trim ./assets/ ./assets/*
 package main
 
 import (
 	"context"
 	"fmt"
 	"log"
-
-	"github.com/akerl/github-auth-lambda/static"
 
 	"github.com/akerl/go-lambda/apigw/events"
 	"github.com/google/go-github/github"
