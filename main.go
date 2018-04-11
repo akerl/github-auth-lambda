@@ -4,82 +4,21 @@ import (
 	"context"
 	"crypto/rand"
 	"encoding/base64"
-	"fmt"
 	"log"
-	"net/http"
-	"os"
 	"regexp"
 
 	"github.com/akerl/go-lambda/apigw/events"
 	"github.com/akerl/go-lambda/apigw/router"
-	"github.com/akerl/go-lambda/s3"
 	"github.com/google/go-github/github"
 	"github.com/gorilla/securecookie"
 	"golang.org/x/oauth2"
 	githubOauth "golang.org/x/oauth2/github"
-	"gopkg.in/yaml.v2"
 )
 
 // TODO: Clean up error messages / logging
 // TODO: Return useful HTTP error codes for failure
 // TODO: Review error leakage to front/backends
-
-type configFile struct {
-	ClientSecret string `json:"clientsecret"`
-	ClientID     string `json:"clientid"`
-	SignKey      string `json:"signkey"`
-	EncKey       string `json:"enckey"`
-}
-
-type sessionManager struct {
-	Name  string
-	Codec securecookie.Codec
-}
-
-type session struct {
-	Nonce string   `json:"state"`
-	Token string   `json:"token"`
-	Login string   `json:"login"`
-	Orgs  []string `json:"orgs"`
-}
-
-func (sc *sessionManager) Read(req events.Request) (session, error) {
-	sess := session{}
-
-	header := http.Header{}
-	header.Add("Cookie", req.Headers["Cookie"])
-	request := http.Request{Header: header}
-	cookie, err := request.Cookie(sm.Name)
-	if err == http.ErrNoCookie {
-		return sess, nil
-	} else if err != nil {
-		return sess, fmt.Errorf("failed to read cookie: %s", err)
-	}
-
-	err = sc.Codec.Decode(sm.Name, cookie.Value, &sess)
-	if err != nil {
-		log.Printf("failed to decode cookie: %s", err)
-	}
-	return sess, err
-}
-
-func (sc *sessionManager) Write(sess session) (string, error) {
-	encoded, err := sc.Codec.Encode(sm.Name, sess)
-	if err != nil {
-		return "", err
-	}
-
-	// TODO: Set expiration time / max age
-	// TODO: Set domain field
-	cookie := &http.Cookie{
-		Name:     sm.Name,
-		Value:    encoded,
-		Path:     "/",
-		Secure:   true,
-		HttpOnly: true,
-	}
-	return cookie.String(), nil
-}
+// TODO: Handle favicon
 
 const (
 	redirectURL = ""
@@ -94,9 +33,8 @@ var (
 	authRegex     = regexp.MustCompile(`^/auth$`)
 	callbackRegex = regexp.MustCompile(`^/callback$`)
 	indexRegex    = regexp.MustCompile(`^/$`)
-	// TODO: Handle favicon
-	faviconRegex = regexp.MustCompile(`/favicon.ico`)
-	defaultRegex = regexp.MustCompile(`/.*`)
+	faviconRegex  = regexp.MustCompile(`/favicon.ico`)
+	defaultRegex  = regexp.MustCompile(`/.*`)
 )
 
 func authHandler(req events.Request) (events.Response, error) {
@@ -174,7 +112,6 @@ func callbackHandler(req events.Request) (events.Response, error) {
 		orgList = append(orgList, *i.Login)
 	}
 
-	sess.Token = token.AccessToken
 	sess.Login = *user.Name
 	sess.Orgs = orgList
 
@@ -207,50 +144,19 @@ func defaultHandler(req events.Request) (events.Response, error) {
 	return events.Redirect("https://"+req.Headers["Host"], 303)
 }
 
-func loadConfig() (*configFile, error) {
-	c := configFile{}
-
-	bucket := os.Getenv("S3_BUCKET")
-	path := os.Getenv("S3_KEY")
-	if bucket == "" || path == "" {
-		return &c, fmt.Errorf("variables not provided")
-	}
-
-	obj, err := s3.GetObject(bucket, path)
-	if err != nil {
-		return &c, err
-	}
-
-	err = yaml.Unmarshal(obj, &c)
-	// TODO: Validate that client ID/Secret are set
-	return &c, err
-}
-
 func main() {
 	var err error
 
 	config, err = loadConfig()
 	if err != nil {
-		log.Print(err)
-		return
-	}
-
-	signKey, err := base64.URLEncoding.DecodeString(config.SignKey)
-	if err != nil {
-		log.Print(err)
-		return
-	}
-	encKey, err := base64.URLEncoding.DecodeString(config.EncKey)
-	if err != nil {
-		log.Print(err)
-		return
+		panic(err)
 	}
 
 	sm = &sessionManager{
 		Name: "session",
 		Codec: securecookie.New(
-			signKey,
-			encKey,
+			config.SignKey,
+			config.EncKey,
 		),
 	}
 
