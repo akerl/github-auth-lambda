@@ -81,6 +81,12 @@
   revision = "53e6ce116135b80d037921a7fdd5138cf32d7a8a"
 
 [[projects]]
+  name = "github.com/google/uuid"
+  packages = ["."]
+  revision = "064e2069ce9c359c118179501254f67d7d37ba24"
+  version = "0.2"
+
+[[projects]]
   name = "github.com/gorilla/securecookie"
   packages = ["."]
   revision = "e59506cc896acb7f7bf732d4fdf5e25f7ccd8983"
@@ -133,6 +139,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "39b3ce5e584ea399f95d6ac3313a531f23ef055ab6a966be46e85a901dac9583"
+  inputs-digest = "a955a6591d15f5f22e98eb8f7eb86edbb4bf0573d925a16c7172c87609dfb807"
   solver-name = "gps-cdcl"
   solver-version = 1

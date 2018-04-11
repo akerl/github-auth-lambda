@@ -12,6 +12,8 @@ import (
 type configFile struct {
 	ClientSecret  string `json:"clientsecret"`
 	ClientID      string `json:"clientid"`
+	Lifetime      int    `json:"lifetime"`
+	Domain        string `json:"domain"`
 	Base64SignKey string `json:"signkey"`
 	Base64EncKey  string `json:"enckey"`
 	SignKey       []byte `json:"-"`
@@ -24,7 +26,7 @@ func loadConfig() (*configFile, error) {
 	bucket := os.Getenv("S3_BUCKET")
 	path := os.Getenv("S3_KEY")
 	if bucket == "" || path == "" {
-		return &c, fmt.Errorf("variables not provided")
+		return &c, fmt.Errorf("config location not provided")
 	}
 
 	obj, err := s3.GetObject(bucket, path)
@@ -37,12 +39,16 @@ func loadConfig() (*configFile, error) {
 		return &c, err
 	}
 
+	if c.Lifetime == 0 {
+		c.Lifetime = 86400
+	}
+
 	if c.ClientSecret == "" || c.ClientID == "" {
-		return &c, fmt.Errorf("Client ID and Secret must be set")
+		return &c, fmt.Errorf("clientid and clientsecret not set")
 	}
 
 	if c.Base64SignKey == "" || c.Base64EncKey == "" {
-		return &c, fmt.Errorf("Signing and encryption keys not set")
+		return &c, fmt.Errorf("signing and encryption keys not set")
 	}
 
 	c.SignKey, err = base64.URLEncoding.DecodeString(c.Base64SignKey)

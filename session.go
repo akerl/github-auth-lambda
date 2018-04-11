@@ -1,8 +1,8 @@
 package main
 
 import (
-	"fmt"
-	"log"
+	"crypto/rand"
+	"encoding/base64"
 	"net/http"
 
 	"github.com/akerl/go-lambda/apigw/events"
@@ -10,14 +10,50 @@ import (
 )
 
 type session struct {
-	Nonce string   `json:"state"`
-	Login string   `json:"login"`
-	Orgs  []string `json:"orgs"`
+	Nonce  string   `json:"state"`
+	Login  string   `json:"login"`
+	Orgs   []string `json:"orgs"`
+	Target string   `json:"target"`
+}
+
+func (s *session) SetNonce() error {
+	b := make([]byte, 16)
+	_, err := rand.Read(b)
+	if err != nil {
+		return err
+	}
+	s.Nonce = base64.URLEncoding.EncodeToString(b)
+	return nil
 }
 
 type sessionManager struct {
-	Name  string
-	Codec securecookie.Codec
+	Name     string
+	SignKey  []byte
+	EncKey   []byte
+	Lifetime int
+	Domain   string
+	codec    *securecookie.SecureCookie
+}
+
+func (sc *sessionManager) initCodec() {
+	if sc.codec != nil {
+		return
+	}
+	sc.codec = securecookie.New(
+		sc.SignKey,
+		sc.EncKey,
+	)
+	sc.codec.MaxAge(sc.Lifetime)
+}
+
+func (sc *sessionManager) decode(name, cookie string, sess *session) error {
+	sc.initCodec()
+	return sc.codec.Decode(name, cookie, &sess)
+}
+
+func (sc *sessionManager) encode(name string, sess session) (string, error) {
+	sc.initCodec()
+	return sc.codec.Encode(name, sess)
 }
 
 func (sc *sessionManager) Read(req events.Request) (session, error) {
@@ -30,30 +66,28 @@ func (sc *sessionManager) Read(req events.Request) (session, error) {
 	if err == http.ErrNoCookie {
 		return sess, nil
 	} else if err != nil {
-		return sess, fmt.Errorf("failed to read cookie: %s", err)
+		return sess, err
 	}
 
-	err = sc.Codec.Decode(sm.Name, cookie.Value, &sess)
-	if err != nil {
-		log.Printf("failed to decode cookie: %s", err)
-	}
+	err = sc.decode(sm.Name, cookie.Value, &sess)
 	return sess, err
 }
 
 func (sc *sessionManager) Write(sess session) (string, error) {
-	encoded, err := sc.Codec.Encode(sm.Name, sess)
+	encoded, err := sc.encode(sm.Name, sess)
 	if err != nil {
 		return "", err
 	}
 
-	// TODO: Set expiration time / max age
-	// TODO: Set domain field
 	cookie := &http.Cookie{
 		Name:     sm.Name,
 		Value:    encoded,
 		Path:     "/",
 		Secure:   true,
 		HttpOnly: true,
+		MaxAge:   sc.Lifetime,
+		Domain:   sc.Domain,
 	}
+
 	return cookie.String(), nil
 }
