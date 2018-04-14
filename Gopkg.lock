@@ -59,8 +59,8 @@
 [[projects]]
   name = "github.com/go-ini/ini"
   packages = ["."]
-  revision = "5e9692864e22d02ac79e2fa499cffb00520b4fea"
-  version = "v1.34.0"
+  revision = "ace140f73450505f33e8b8418216792275ae82a7"
+  version = "v1.35.0"
 
 [[projects]]
   name = "github.com/golang/protobuf"
@@ -102,9 +102,7 @@
   name = "golang.org/x/net"
   packages = [
     "context",
-    "context/ctxhttp",
-    "webdav",
-    "webdav/internal/xml"
+    "context/ctxhttp"
   ]
   revision = "61147c48b25b599e5b561d2e9c4f3e1ef489ca41"
 
@@ -141,6 +139,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "1e2e8d82e031db95f6d843860d92766ef3232cdbb041ed605dbabdcb8381a88c"
+  inputs-digest = "a955a6591d15f5f22e98eb8f7eb86edbb4bf0573d925a16c7172c87609dfb807"
   solver-name = "gps-cdcl"
   solver-version = 1
