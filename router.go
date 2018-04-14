@@ -62,11 +62,11 @@ func indexHandler(req events.Request) (events.Response, error) {
 }
 
 func faviconHandler(req events.Request) (events.Response, error) {
-	favicon, err := static.String("favicon.ico")
-	if err != nil {
+	favicon, found := static.String("favicon.ico")
+	if !found {
 		return missingHandler(req)
 	}
-	return events.Succeed(string(favicon))
+	return events.Succeed(favicon)
 }
 
 func missingHandler(_ events.Request) (events.Response, error) {
