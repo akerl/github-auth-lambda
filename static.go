@@ -132,8 +132,10 @@ func (f *FileInfo) Sys() interface{} {
 	return f.sys
 }
 
+var static *FileSystem
+
 func init() {
-	FS = &FileSystem{
+	static = &FileSystem{
 		files: map[string]File{
 			"/favicon.ico": File{
 				data: []byte{
@@ -605,7 +607,7 @@ func init() {
 				fi: FileInfo{
 					name:    "favicon.ico",
 					size:    5558,
-					modTime: time.Unix(0, 1523457789513995842),
+					modTime: time.Unix(0, 1523728129481329569),
 					isDir:   false,
 				},
 			},

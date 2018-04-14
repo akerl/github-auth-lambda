@@ -1,4 +1,4 @@
-//go:generate resources -output static.go -fmt -trim ./assets/ ./assets/*
+//go:generate resources -output static.go -declare -var static -fmt -trim ./assets/ ./assets/*
 package main
 
 import (
