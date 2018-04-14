@@ -1,4 +1,4 @@
-//go:generate resources -output static.go -declare -var static -fmt -trim ./assets/ ./assets/*
+//go:generate resources -output static.go -declare -var static -fmt -trim assets/ assets/*
 package main
 
 import (
@@ -62,7 +62,7 @@ func indexHandler(req events.Request) (events.Response, error) {
 }
 
 func faviconHandler(req events.Request) (events.Response, error) {
-	favicon, err := static.ReadFile("favicon.ico")
+	favicon, err := static.String("favicon.ico")
 	if err != nil {
 		return missingHandler(req)
 	}
