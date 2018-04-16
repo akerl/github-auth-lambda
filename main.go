@@ -49,7 +49,7 @@ func main() {
 			router.Route{Path: authRegex, Handler: authHandler},
 			router.Route{Path: callbackRegex, Handler: callbackHandler},
 			router.Route{Path: indexRegex, Handler: indexHandler},
-			router.Route{Path: faviconRegex, Handler: missingHandler},
+			router.Route{Path: faviconRegex, Handler: faviconHandler},
 			router.Route{Path: defaultRegex, Handler: defaultHandler},
 		},
 	}

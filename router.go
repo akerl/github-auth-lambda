@@ -3,6 +3,7 @@ package main
 
 import (
 	"context"
+	"encoding/base64"
 	"fmt"
 	"log"
 
@@ -55,18 +56,34 @@ func defaultHandler(req events.Request) (events.Response, error) {
 }
 
 func indexHandler(req events.Request) (events.Response, error) {
-	// TODO: use nicer homepage template
-	// TODO: Show if you're already auth'd
-	// TODO: Show link to auth page
-	return events.Succeed("Hello!")
+	page, err := execTemplate("/index.html", req)
+	if err != nil {
+		return fail(fmt.Sprintf("failed to exec template: %s", err))
+	}
+	return events.Response{
+		StatusCode: 200,
+		Body:       page,
+		Headers: map[string]string{
+			"Content-Type": "text/html; charset=utf-8",
+		},
+	}, nil
 }
 
 func faviconHandler(req events.Request) (events.Response, error) {
-	favicon, found := static.String("favicon.ico")
+	favicon, found := static.files["/favicon.ico"]
 	if !found {
 		return missingHandler(req)
 	}
-	return events.Succeed(favicon)
+
+	encodedFavicon := base64.StdEncoding.EncodeToString(favicon.data)
+	return events.Response{
+		StatusCode: 200,
+		Body:       encodedFavicon,
+		Headers: map[string]string{
+			"Content-Type": "image/x-icon",
+		},
+		IsBase64Encoded: true,
+	}, nil
 }
 
 func missingHandler(_ events.Request) (events.Response, error) {
@@ -139,7 +156,7 @@ func callbackHandler(req events.Request) (events.Response, error) {
 		orgList = append(orgList, *i.Login)
 	}
 
-	sess.Login = *user.Name
+	sess.Login = *user.Login
 	sess.Orgs = orgList
 
 	return success(req, sess)

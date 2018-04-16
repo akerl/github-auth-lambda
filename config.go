@@ -6,18 +6,19 @@ import (
 	"os"
 
 	"github.com/akerl/go-lambda/s3"
-	"gopkg.in/yaml.v2"
+	"github.com/ghodss/yaml"
 )
 
 type configFile struct {
-	ClientSecret  string `json:"clientsecret"`
-	ClientID      string `json:"clientid"`
-	Lifetime      int    `json:"lifetime"`
-	Domain        string `json:"domain"`
-	Base64SignKey string `json:"signkey"`
-	Base64EncKey  string `json:"enckey"`
-	SignKey       []byte `json:"-"`
-	EncKey        []byte `json:"-"`
+	ClientSecret  string            `json:"clientsecret"`
+	ClientID      string            `json:"clientid"`
+	Lifetime      int               `json:"lifetime"`
+	Domain        string            `json:"domain"`
+	Base64SignKey string            `json:"signkey"`
+	Base64EncKey  string            `json:"enckey"`
+	SignKey       []byte            `json:"-"`
+	EncKey        []byte            `json:"-"`
+	TemplateData  map[string]string `json:"templatedata"`
 }
 
 func loadConfig() (*configFile, error) {

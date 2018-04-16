@@ -57,20 +57,25 @@ func (sc *sessionManager) encode(name string, sess session) (string, error) {
 }
 
 func (sc *sessionManager) Read(req events.Request) (session, error) {
-	sess := session{}
-
 	header := http.Header{}
 	header.Add("Cookie", req.Headers["Cookie"])
 	request := http.Request{Header: header}
 	cookie, err := request.Cookie(sm.Name)
 	if err == http.ErrNoCookie {
-		return sess, nil
+		return session{}, nil
 	} else if err != nil {
-		return sess, err
+		return session{}, err
 	}
 
-	err = sc.decode(sm.Name, cookie.Value, &sess)
-	return sess, err
+	s := session{}
+	err = sc.decode(sm.Name, cookie.Value, &s)
+	if err == nil {
+		return s, nil
+	}
+	if scError, ok := err.(securecookie.Error); ok && scError.IsDecode() {
+		return session{}, nil
+	}
+	return session{}, err
 }
 
 func (sc *sessionManager) Write(sess session) (string, error) {

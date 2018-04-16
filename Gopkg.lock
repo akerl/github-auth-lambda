@@ -57,6 +57,23 @@
   version = "v1.13.32"
 
 [[projects]]
+  name = "github.com/aymerick/raymond"
+  packages = [
+    ".",
+    "ast",
+    "lexer",
+    "parser"
+  ]
+  revision = "2eebd0f5dd9564c0c6e439df11d8a3c7b9b9ab11"
+  version = "v2.0.2"
+
+[[projects]]
+  name = "github.com/ghodss/yaml"
+  packages = ["."]
+  revision = "0ca9ea5df5451ffdf184b4428c902747c2c11cd7"
+  version = "v1.0.0"
+
+[[projects]]
   name = "github.com/go-ini/ini"
   packages = ["."]
   revision = "ace140f73450505f33e8b8418216792275ae82a7"
@@ -139,6 +156,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "a955a6591d15f5f22e98eb8f7eb86edbb4bf0573d925a16c7172c87609dfb807"
+  inputs-digest = "e41552b6a20213e8f3d2c0fd3c82898f481faf80d42100ef3c67c6dbeca9aff8"
   solver-name = "gps-cdcl"
   solver-version = 1
