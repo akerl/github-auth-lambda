@@ -53,8 +53,8 @@
     "service/s3",
     "service/sts"
   ]
-  revision = "3e7014382cdc91695381614d0110a3cff997ba72"
-  version = "v1.13.34"
+  revision = "4f810fa5d8869fcfca0a0a7f6a834ee9cfa22095"
+  version = "v1.13.40"
 
 [[projects]]
   name = "github.com/aymerick/raymond"
@@ -82,8 +82,8 @@
 [[projects]]
   name = "github.com/golang/protobuf"
   packages = ["proto"]
-  revision = "925541529c1fa6821df4e44ce2723319eb2be768"
-  version = "v1.0.0"
+  revision = "b4deda0973fb4c70b50d226b1af49f3da59f5265"
+  version = "v1.1.0"
 
 [[projects]]
   name = "github.com/google/go-github"
@@ -121,7 +121,7 @@
     "context",
     "context/ctxhttp"
   ]
-  revision = "5f9ae10d9af5b1c89ae6904293b14b064d4ada23"
+  revision = "640f4622ab692b87c2f3a94265e6f579fe38263d"
 
 [[projects]]
   branch = "master"
