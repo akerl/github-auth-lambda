@@ -131,7 +131,7 @@
     "github",
     "internal"
   ]
-  revision = "6881fee410a5daf86371371f9ad451b95e168b71"
+  revision = "cdc340f7c179dbbfa4afd43b7614e8fcadde4269"
 
 [[projects]]
   name = "google.golang.org/appengine"
