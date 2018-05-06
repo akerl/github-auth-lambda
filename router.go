@@ -112,6 +112,10 @@ func authHandler(req events.Request) (events.Response, error) {
 	return redirect(req, sess, url)
 }
 
+func logoutHandler(req events.Request) (events.Response, error) {
+	return redirect(req, session{}, "")
+}
+
 func callbackHandler(req events.Request) (events.Response, error) {
 	sess, err := sm.Read(req)
 	if err != nil {

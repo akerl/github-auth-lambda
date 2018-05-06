@@ -15,10 +15,11 @@ var (
 	scopes   = []string{"read:org"}
 
 	authRegex     = regexp.MustCompile(`^/auth$`)
+	logoutRegex   = regexp.MustCompile(`^/logout$`)
 	callbackRegex = regexp.MustCompile(`^/callback$`)
 	indexRegex    = regexp.MustCompile(`^/$`)
-	faviconRegex  = regexp.MustCompile(`/favicon.ico`)
-	defaultRegex  = regexp.MustCompile(`/.*`)
+	faviconRegex  = regexp.MustCompile(`^/favicon.ico$`)
+	defaultRegex  = regexp.MustCompile(`^/.*$`)
 )
 
 func main() {
@@ -47,6 +48,7 @@ func main() {
 	r := router.Router{
 		Routes: []router.Route{
 			router.Route{Path: authRegex, Handler: authHandler},
+			router.Route{Path: logoutRegex, Handler: logoutHandler},
 			router.Route{Path: callbackRegex, Handler: callbackHandler},
 			router.Route{Path: indexRegex, Handler: indexHandler},
 			router.Route{Path: faviconRegex, Handler: faviconHandler},
