@@ -13,15 +13,21 @@
             <h1 class="title">OAuth Handler</h1>
             {{#if session.login}}
                 <p>You're already logged in, {{session.login}}</p>
-                {{#if session.orgs}}
-                    <p>You're a member of these orgs:</p>
+                {{#if session.memberships}}
+                    <p>Your memberships:</p>
                     <ul>
-                        {{#each session.orgs}}
-                            <li>{{this}}</li>
+                        {{#each session.membership as |teams org|}}
+                            <li>{{org}}
+                                <ul>
+                                    {{#each teams as |team|}}
+                                        <li>{{team}}</li>
+                                    {{/each}}
+                                </ul>
+                            </li>
                         {{/each}}
                     </ul>
                 {{else}}
-                    <p>You don't seem to be in any orgs</p>
+                    <p>You don't seem to have any memberships</p>
                 {{/if}}
                 <p><a href="/logout">Click here</a> to log out</p>
             {{else}}

@@ -155,12 +155,13 @@ func callbackHandler(req events.Request) (events.Response, error) {
 	}
 	sess.Login = *user.Login
 
-	orgs, _, err := client.Organizations.List(context.Background(), "", &github.ListOptions{})
+	teams, _, err := client.Organizations.ListUserTeams(context.Background(), &github.ListOptions{})
 	if err != nil {
-		return fail(fmt.Sprintf("error getting orgs: %s", err))
+		return fail(fmt.Sprintf("error getting teams: %s", err))
 	}
-	for _, i := range orgs {
-		sess.Memberships[*i.Login] = []string{}
+	for _, t := range teams {
+		org := *t.Organization.Login
+		sess.Memberships[org] = append(sess.Memberships[org], *t.Slug)
 	}
 
 	return success(req, sess)
