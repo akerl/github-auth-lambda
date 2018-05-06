@@ -159,6 +159,7 @@ func callbackHandler(req events.Request) (events.Response, error) {
 	if err != nil {
 		return fail(fmt.Sprintf("error getting teams: %s", err))
 	}
+	sess.Memberships = make(map[string][]string)
 	for _, t := range teams {
 		org := *t.Organization.Login
 		sess.Memberships[org] = append(sess.Memberships[org], *t.Slug)
