@@ -7,6 +7,8 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/akerl/github-auth-lambda/session"
+
 	"github.com/akerl/go-lambda/apigw/events"
 	"github.com/google/go-github/github"
 	"github.com/google/uuid"
@@ -26,13 +28,13 @@ func fail(msg string) (events.Response, error) {
 	return events.Fail(userError)
 }
 
-func success(req events.Request, sess session) (events.Response, error) {
+func success(req events.Request, sess session.Session) (events.Response, error) {
 	target := sess.Target
 	sess.Target = ""
 	return redirect(req, sess, target)
 }
 
-func redirect(req events.Request, sess session, target string) (events.Response, error) {
+func redirect(req events.Request, sess session.Session, target string) (events.Response, error) {
 	if target == "" {
 		target = "https://" + req.Headers["Host"]
 	}
@@ -113,7 +115,7 @@ func authHandler(req events.Request) (events.Response, error) {
 }
 
 func logoutHandler(req events.Request) (events.Response, error) {
-	return redirect(req, session{}, "")
+	return redirect(req, session.Session{}, "")
 }
 
 func callbackHandler(req events.Request) (events.Response, error) {
@@ -146,22 +148,20 @@ func callbackHandler(req events.Request) (events.Response, error) {
 	}
 
 	client := github.NewClient(oauthCfg.Client(oauth2.NoContext, token))
+
 	user, _, err := client.Users.Get(context.Background(), "")
 	if err != nil {
 		return fail(fmt.Sprintf("error getting name: %s", err))
 	}
-	orgs, _, err := client.Organizations.List(context.Background(), "", &github.ListOptions{})
+	sess.Login = *user.Login
 
+	orgs, _, err := client.Organizations.List(context.Background(), "", &github.ListOptions{})
 	if err != nil {
 		return fail(fmt.Sprintf("error getting orgs: %s", err))
 	}
-	var orgList []string
 	for _, i := range orgs {
-		orgList = append(orgList, *i.Login)
+		sess.Memberships[*i.Login] = []string{}
 	}
-
-	sess.Login = *user.Login
-	sess.Orgs = orgList
 
 	return success(req, sess)
 }

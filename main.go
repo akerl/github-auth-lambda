@@ -3,6 +3,8 @@ package main
 import (
 	"regexp"
 
+	"github.com/akerl/github-auth-lambda/session"
+
 	"github.com/akerl/go-lambda/apigw/router"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/github"
@@ -10,7 +12,7 @@ import (
 
 var (
 	config   *configFile
-	sm       *sessionManager
+	sm       *session.Manager
 	oauthCfg *oauth2.Config
 	scopes   = []string{"read:org"}
 
@@ -30,7 +32,7 @@ func main() {
 		panic(err)
 	}
 
-	sm = &sessionManager{
+	sm = &session.Manager{
 		Name:     "session",
 		SignKey:  config.SignKey,
 		EncKey:   config.EncKey,

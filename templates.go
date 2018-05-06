@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 
+	"github.com/akerl/github-auth-lambda/session"
+
 	"github.com/akerl/go-lambda/apigw/events"
 	"github.com/aymerick/raymond"
 )
@@ -47,7 +49,7 @@ func init() {
 }
 
 type templateContext struct {
-	Session session
+	Session session.Session
 	Request events.Request
 	Config  map[string]string
 }
