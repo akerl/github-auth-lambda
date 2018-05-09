@@ -102,7 +102,9 @@ func authHandler(req events.Request) (events.Response, error) {
 		return success(req, sess)
 	}
 
-	sess.Target = req.QueryStringParameters["redirect"]
+	if sess.Target == "" {
+		sess.Target = req.QueryStringParameters["redirect"]
+	}
 
 	err = sess.SetNonce()
 	if err != nil {
