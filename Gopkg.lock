@@ -53,8 +53,8 @@
     "service/s3",
     "service/sts"
   ]
-  revision = "cf00d544fc3c02f31e05e8d02444a1325d3a840b"
-  version = "v1.13.53"
+  revision = "fad131ddc707880428615dc8bc1587b55fb46d74"
+  version = "v1.13.54"
 
 [[projects]]
   name = "github.com/aymerick/raymond"
@@ -131,7 +131,7 @@
     "github",
     "internal"
   ]
-  revision = "dd5f5d8e78ce062a4aa881dff95a94f2a0fd405a"
+  revision = "770e5ebd4ab27c4d70b0983674d138217f5e2c72"
 
 [[projects]]
   name = "google.golang.org/appengine"
