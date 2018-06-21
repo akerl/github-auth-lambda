@@ -8,8 +8,8 @@
     "apigw/router",
     "s3"
   ]
-  revision = "6dda7b7c070b3adaaf51e2fddeb3c112f479c5fe"
-  version = "0.0.18"
+  revision = "1ae7f885102875375929551b4d605153c1ad294e"
+  version = "0.1.0"
 
 [[projects]]
   name = "github.com/aws/aws-lambda-go"
@@ -56,8 +56,8 @@
     "service/s3",
     "service/sts"
   ]
-  revision = "d2d4fca90395039f60821c231da759cab8f318c7"
-  version = "v1.14.4"
+  revision = "e4805606f5138247510183050abe642344275ebd"
+  version = "v1.14.10"
 
 [[projects]]
   name = "github.com/aymerick/raymond"
@@ -69,12 +69,6 @@
   ]
   revision = "2eebd0f5dd9564c0c6e439df11d8a3c7b9b9ab11"
   version = "v2.0.2"
-
-[[projects]]
-  name = "github.com/ghodss/yaml"
-  packages = ["."]
-  revision = "0ca9ea5df5451ffdf184b4428c902747c2c11cd7"
-  version = "v1.0.0"
 
 [[projects]]
   name = "github.com/go-ini/ini"
@@ -134,7 +128,7 @@
     "github",
     "internal"
   ]
-  revision = "1e0a3fa8ba9a5c9eb35c271780101fdaf1b205d7"
+  revision = "ef147856a6ddbb60760db74283d2424e98c87bff"
 
 [[projects]]
   name = "google.golang.org/appengine"
@@ -147,8 +141,8 @@
     "internal/urlfetch",
     "urlfetch"
   ]
-  revision = "150dc57a1b433e64154302bdc40b6bb8aefa313a"
-  version = "v1.0.0"
+  revision = "b1f26356af11148e710935ed1ac8a7f5702c7612"
+  version = "v1.1.0"
 
 [[projects]]
   name = "gopkg.in/yaml.v2"
@@ -159,6 +153,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "e41552b6a20213e8f3d2c0fd3c82898f481faf80d42100ef3c67c6dbeca9aff8"
+  inputs-digest = "814baf7c1019376ab5ed8c4f926d7e1161e897d142daa18d82d7fa3fefed87d0"
   solver-name = "gps-cdcl"
   solver-version = 1
