@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/base64"
 	"fmt"
-	"os"
 
 	"github.com/akerl/go-lambda/s3"
 )
@@ -22,10 +21,14 @@ type configFile struct {
 
 func loadConfig() (*configFile, error) {
 	c := configFile{}
-	err := s3.GetConfigFromEnv(&c)
+	cf, err := s3.GetConfigFromEnv(&c)
 	if err != nil {
 		return &c, err
 	}
+	cf.OnError = func(_ *s3.ConfigFile, err error) {
+		fmt.Println(err)
+	}
+	cf.Autoreload(60)
 
 	if c.Lifetime == 0 {
 		c.Lifetime = 86400

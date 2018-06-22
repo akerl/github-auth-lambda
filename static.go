@@ -607,7 +607,7 @@ func init() {
 				fi: FileInfo{
 					name:    "favicon.ico",
 					size:    5558,
-					modTime: time.Unix(0, 1523728129481329569),
+					modTime: time.Unix(0, 1527090282022963545),
 					isDir:   false,
 				},
 			}, "/index.html.hbs": File{
@@ -753,7 +753,7 @@ func init() {
 				fi: FileInfo{
 					name:    "index.html.hbs",
 					size:    1637,
-					modTime: time.Unix(0, 1525571524681850728),
+					modTime: time.Unix(0, 1527090282023306924),
 					isDir:   false,
 				},
 			},
