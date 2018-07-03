@@ -8,8 +8,8 @@
     "apigw/router",
     "s3"
   ]
-  revision = "1ae7f885102875375929551b4d605153c1ad294e"
-  version = "0.1.0"
+  revision = "4b756535142af8f3bf72deeed9a30d648dff3e18"
+  version = "0.2.0"
 
 [[projects]]
   name = "github.com/aws/aws-lambda-go"
@@ -69,6 +69,12 @@
   ]
   revision = "2eebd0f5dd9564c0c6e439df11d8a3c7b9b9ab11"
   version = "v2.0.2"
+
+[[projects]]
+  name = "github.com/ghodss/yaml"
+  packages = ["."]
+  revision = "0ca9ea5df5451ffdf184b4428c902747c2c11cd7"
+  version = "v1.0.0"
 
 [[projects]]
   name = "github.com/go-ini/ini"
@@ -153,6 +159,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "814baf7c1019376ab5ed8c4f926d7e1161e897d142daa18d82d7fa3fefed87d0"
+  inputs-digest = "f76e2b82d2c3f935c90fcaf79a439004cfe137e9bc3e5a352aca058d0dbc072d"
   solver-name = "gps-cdcl"
   solver-version = 1
