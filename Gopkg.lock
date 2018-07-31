@@ -57,8 +57,8 @@
     "service/s3",
     "service/sts"
   ]
-  revision = "8475c414b1bd58b8cc214873a8854e3a621e67d7"
-  version = "v1.15.0"
+  revision = "123c8c8326730972861f45fe2e6e7b1d64b4d487"
+  version = "v1.15.1"
 
 [[projects]]
   name = "github.com/aymerick/raymond"
@@ -125,7 +125,7 @@
     "context",
     "context/ctxhttp"
   ]
-  revision = "c4299a1a0d8524c11563db160fbf9bddbceadb21"
+  revision = "a0f8a16cb08c06df97cbdf9c47f4731ba548c33c"
 
 [[projects]]
   branch = "master"
