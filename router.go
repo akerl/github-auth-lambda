@@ -12,7 +12,6 @@ import (
 	"github.com/akerl/go-lambda/apigw/events"
 	"github.com/google/go-github/github"
 	"github.com/google/uuid"
-	"golang.org/x/oauth2"
 )
 
 func fail(msg string) (events.Response, error) {
@@ -140,7 +139,7 @@ func callbackHandler(req events.Request) (events.Response, error) {
 	}
 
 	code := req.QueryStringParameters["code"]
-	token, err := oauthCfg.Exchange(oauth2.NoContext, code)
+	token, err := oauthCfg.Exchange(context.Background(), code)
 	if err != nil {
 		return fail(fmt.Sprintf("there was an issue getting your token: %s", err))
 	}
@@ -149,7 +148,7 @@ func callbackHandler(req events.Request) (events.Response, error) {
 		return fail("retreived invalid token")
 	}
 
-	client := github.NewClient(oauthCfg.Client(oauth2.NoContext, token))
+	client := github.NewClient(oauthCfg.Client(context.Background(), token))
 
 	user, _, err := client.Users.Get(context.Background(), "")
 	if err != nil {

@@ -49,12 +49,12 @@ func main() {
 
 	r := router.Router{
 		Routes: []router.Route{
-			router.Route{Path: authRegex, Handler: authHandler},
-			router.Route{Path: logoutRegex, Handler: logoutHandler},
-			router.Route{Path: callbackRegex, Handler: callbackHandler},
-			router.Route{Path: indexRegex, Handler: indexHandler},
-			router.Route{Path: faviconRegex, Handler: faviconHandler},
-			router.Route{Path: defaultRegex, Handler: defaultHandler},
+			{Path: authRegex, Handler: authHandler},
+			{Path: logoutRegex, Handler: logoutHandler},
+			{Path: callbackRegex, Handler: callbackHandler},
+			{Path: indexRegex, Handler: indexHandler},
+			{Path: faviconRegex, Handler: faviconHandler},
+			{Path: defaultRegex, Handler: defaultHandler},
 		},
 	}
 	r.Start()
