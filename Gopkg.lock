@@ -19,8 +19,8 @@
     "lambda/messages",
     "lambdacontext"
   ]
-  revision = "e630af386f8aad6ec9fc899b951cf62d37cfe56f"
-  version = "v1.4.0"
+  revision = "2d482ef09017ae953b1e8d5a6ddac5b696663a3c"
+  version = "v1.6.0"
 
 [[projects]]
   name = "github.com/aws/aws-sdk-go"
@@ -57,8 +57,8 @@
     "service/s3",
     "service/sts"
   ]
-  revision = "b36008bfc7d4b9826423278ae193420e41afc4b4"
-  version = "v1.15.14"
+  revision = "66974140c322f22c1daaf95a18930ea6a9e4d21e"
+  version = "v1.15.16"
 
 [[projects]]
   name = "github.com/aymerick/raymond"
@@ -86,8 +86,8 @@
 [[projects]]
   name = "github.com/golang/protobuf"
   packages = ["proto"]
-  revision = "b4deda0973fb4c70b50d226b1af49f3da59f5265"
-  version = "v1.1.0"
+  revision = "aa810b61a9c79d51363740d207bb46cf8e620ed5"
+  version = "v1.2.0"
 
 [[projects]]
   name = "github.com/google/go-github"
@@ -125,7 +125,7 @@
     "context",
     "context/ctxhttp"
   ]
-  revision = "aaf60122140d3fcf75376d319f0554393160eb50"
+  revision = "922f4815f713f213882e8ef45e0d315b164d705c"
 
 [[projects]]
   branch = "master"
@@ -135,7 +135,7 @@
     "github",
     "internal"
   ]
-  revision = "3d292e4d0cdc3a0113e6d207bb137145ef1de42f"
+  revision = "f720f1faee02c1fb456408c22886169405f239aa"
 
 [[projects]]
   name = "google.golang.org/appengine"
