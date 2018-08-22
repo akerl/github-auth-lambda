@@ -57,8 +57,8 @@
     "service/s3",
     "service/sts"
   ]
-  revision = "66974140c322f22c1daaf95a18930ea6a9e4d21e"
-  version = "v1.15.16"
+  revision = "505514fea21d88b799f6fbef79fb0c0b108e3437"
+  version = "v1.15.17"
 
 [[projects]]
   name = "github.com/aymerick/raymond"
@@ -80,8 +80,8 @@
 [[projects]]
   name = "github.com/go-ini/ini"
   packages = ["."]
-  revision = "358ee7663966325963d4e8b2e1fbd570c5195153"
-  version = "v1.38.1"
+  revision = "5cf292cae48347c2490ac1a58fe36735fb78df7e"
+  version = "v1.38.2"
 
 [[projects]]
   name = "github.com/golang/protobuf"
@@ -135,7 +135,7 @@
     "github",
     "internal"
   ]
-  revision = "f720f1faee02c1fb456408c22886169405f239aa"
+  revision = "d2e6202438beef2727060aa7cabdd924d92ebfd9"
 
 [[projects]]
   name = "google.golang.org/appengine"
