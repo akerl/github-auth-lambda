@@ -8,8 +8,8 @@
     "apigw/router",
     "s3"
   ]
-  revision = "4b756535142af8f3bf72deeed9a30d648dff3e18"
-  version = "0.2.0"
+  revision = "c49251216d2820775a5ca66c287485f514810b5f"
+  version = "0.2.2"
 
 [[projects]]
   name = "github.com/aws/aws-lambda-go"
@@ -57,8 +57,8 @@
     "service/s3",
     "service/sts"
   ]
-  revision = "ea2d2b9a8808d0c390d966daf855a7b3b74bc44e"
-  version = "v1.15.19"
+  revision = "9b02f79e8b963274a4ca7a1468fa57d6e3f87363"
+  version = "v1.15.20"
 
 [[projects]]
   name = "github.com/aymerick/raymond"
@@ -125,7 +125,7 @@
     "context",
     "context/ctxhttp"
   ]
-  revision = "faa378e6dbaed88bd8100f8bcf09939375c6e8fa"
+  revision = "4bcd98cce591d8c7061bf313d7a3cbad05b58549"
 
 [[projects]]
   branch = "master"
