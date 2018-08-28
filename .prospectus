@@ -1,4 +1,4 @@
-Prospectus.extra_dep('file', 'prospectus_circleci')
+Prospectus.extra_dep('file', 'prospectus_travis')
 
 item do
   noop
@@ -31,5 +31,5 @@ item do
     end
   end
 
-  extend ProspectusCircleci::Build.new('akerl/github-auth-lambda')
+  extend ProspectusTravis::Build.new('akerl/github-auth-lambda')
 end
