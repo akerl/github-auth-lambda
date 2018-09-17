@@ -27,7 +27,7 @@
   version = "v1.6.0"
 
 [[projects]]
-  digest = "1:c6fdab1b853fa78631a98b0c0fd8669421c5b3a5193ca155f5371bb813c47e7b"
+  digest = "1:4bd4630b4a99978dbdfb04976ec350dfa5c903bc5c3bc91a4d4b321f8babce25"
   name = "github.com/aws/aws-sdk-go"
   packages = [
     "aws",
@@ -63,8 +63,8 @@
     "service/sts",
   ]
   pruneopts = "UT"
-  revision = "10d5f1478e28a17062fd79617a8022f5499462d5"
-  version = "v1.15.34"
+  revision = "87474c2d2bbdf6bd31275e435648aeb6c3d6815d"
+  version = "v1.15.35"
 
 [[projects]]
   digest = "1:4333e9d9cc731d01e67e19c33da46e95860b95f8b8032bc586d69b169e1b0c1b"
@@ -112,12 +112,12 @@
   version = "v15.0.0"
 
 [[projects]]
-  branch = "master"
   digest = "1:a63cff6b5d8b95638bfe300385d93b2a6d9d687734b863da8e09dc834510a690"
   name = "github.com/google/go-querystring"
   packages = ["query"]
   pruneopts = "UT"
-  revision = "53e6ce116135b80d037921a7fdd5138cf32d7a8a"
+  revision = "44c6ddd0a2342c386950e880b658017258da92fc"
+  version = "v1.0.0"
 
 [[projects]]
   digest = "1:8f8811f9be822914c3a25c6a071e93beb4c805d7b026cbf298bc577bc1cc945b"
