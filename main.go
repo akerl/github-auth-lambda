@@ -5,7 +5,7 @@ import (
 
 	"github.com/akerl/github-auth-lambda/session"
 
-	"github.com/akerl/go-lambda/apigw/router"
+	"github.com/akerl/go-lambda/mux"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/github"
 )
@@ -47,15 +47,13 @@ func main() {
 		Scopes:       scopes,
 	}
 
-	r := router.Router{
-		Routes: []router.Route{
-			{Path: authRegex, Handler: authHandler},
-			{Path: logoutRegex, Handler: logoutHandler},
-			{Path: callbackRegex, Handler: callbackHandler},
-			{Path: indexRegex, Handler: indexHandler},
-			{Path: faviconRegex, Handler: faviconHandler},
-			{Path: defaultRegex, Handler: defaultHandler},
-		},
-	}
-	r.Start()
+	d := mux.NewDispatcher(
+		mux.NewRoute(authRegex, authHandler),
+		mux.NewRoute(logoutRegex, logoutHandler),
+		mux.NewRoute(callbackRegex, callbackHandler),
+		mux.NewRoute(indexRegex, indexHandler),
+		mux.NewRoute(faviconRegex, faviconHandler),
+		mux.NewRoute(defaultRegex, defaultHandler),
+	)
+	mux.Start(d)
 }

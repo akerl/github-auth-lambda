@@ -26,8 +26,8 @@
 
 
 [[constraint]]
+  branch = "master"
   name = "github.com/akerl/go-lambda"
-  version = "0.2.0"
 
 [[constraint]]
   name = "github.com/aymerick/raymond"
@@ -35,11 +35,11 @@
 
 [[constraint]]
   name = "github.com/google/go-github"
-  version = "15.0.0"
+  version = "18.2.0"
 
 [[constraint]]
   name = "github.com/google/uuid"
-  version = "0.2.0"
+  version = "1.0.0"
 
 [[constraint]]
   name = "github.com/gorilla/securecookie"

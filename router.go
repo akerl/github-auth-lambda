@@ -156,7 +156,7 @@ func callbackHandler(req events.Request) (events.Response, error) {
 	}
 	sess.Login = *user.Login
 
-	teams, _, err := client.Organizations.ListUserTeams(context.Background(), &github.ListOptions{})
+	teams, _, err := client.Teams.ListUserTeams(context.Background(), &github.ListOptions{})
 	if err != nil {
 		return fail(fmt.Sprintf("error getting teams: %s", err))
 	}
