@@ -49,21 +49,23 @@ func init() {
 }
 
 func newTemplateContext(req events.Request) (map[string]interface{}, error) {
+	session, err := sm.Read(req)
+	if err != nil {
+		return map[string]interface{}{}, err
+	}
+
+	orgs := make([]string, len(tcsession.Memberships))
+	for idx, org := range session.Memberships {
+		orgs[idx] = org
+	}
+	sort.Strings(orgs)
+
 	tc := map[string]interface{}{
 		"request": req,
 		"config":  config.TemplateData,
+		"session": session,
+		"orgs":    orgs,
 	}
-
-	var err error
-	tc["session"], err = sm.Read(req)
-	if err != nil {
-		return tc, err
-	}
-	tc["orgs"] = make([]string, len(tc["session"].Memberships))
-	for idx, org := range tc["session"].Memberships {
-		tc["orgs"][idx] = org
-	}
-	sort.Strings(tc["orgs"])
 	return tc, nil
 }
 
