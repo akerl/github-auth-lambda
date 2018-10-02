@@ -7,12 +7,14 @@ env:
   - PATH=$HOME/.local/bin:$PATH
   - PKGFORGE_STATEFILE=/tmp/pkgforge
   - BUCKET=akerl-github-auth-lambda
+  - secure: lj14fHY8i9WAwc+xD9YR64fg5RubpXxsugpijgSfxHJ0mUoL4yO+kI5rT5FnmAw8OcsbJIT93igLJoGZNWGchoDS4A4w3NMG7VUG03uaIOCxQahPBMEGHMD6xfAY/CWYN2Wrg8R/SE7yg3k/teADKSZtsVXd66lWDTpo5hKxqjAADSEcQUQpqEeUhovWvrxuE+oapymJpRgt8m5lxwVk+3cEhwM7vw41ncf2J2gtENK0DamBXRxXfNBcrarxS+RaGRUsJ9uEOo/kZB2xwoQvU6A6ZEBsqIzWvvejgNZ+9/g1BfDbtci4QDGrIUy7421pwOTObq0zl1EbYh9xsxas2OlRJj0k6WxXyhodtgvSy+rnY8vTu2nOOzloxSfowr6SUBFz5nbxPysW0PqJfNu74CYYBqU3w53AC6LA4H7vmhE6lZN3nRyeMChnHPTChXjnsJBRoWYPu8jm/KFh48t9S1o0SSx0QlrD6gyQdJOBnt5D0pwm/fCerPPKFjoxqBIsskvUaiNuC2oifEU6wqrJhDy3O2mj4A+HZGwrRPGSi/5klWxqFGGyy0c/spV9wJzpBs59ELFuC9LlwNxaAT/Zx1baFG4L/D70kGXr7or9QndmYT4m2wesUAbfMG9dRHoJ+6OAbimuDfT5P0pP6yrxzGenT3Az4WkxG2378RxxtZk=
 before_install:
 - pip install --user awscli
 script: make
 deploy:
   provider: script
-  script: 'make release && aws s3 cp pkg/payload.zip "s3://$BUCKET/lambdas/payload-$TRAVIS_TAG.zip" || travis_terminate 1'
+  script: make release && aws s3 cp pkg/payload.zip "s3://$BUCKET/lambdas/payload-$TRAVIS_TAG.zip"
+    || travis_terminate 1
   skip_cleanup: true
   on:
     tags: true
