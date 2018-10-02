@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"sort"
 
 	"github.com/akerl/github-auth-lambda/session"
 
@@ -28,6 +29,7 @@ func loadTemplate(name string) error {
 	if err != nil {
 		return fmt.Errorf("template failed to parse (%s): %s", tplFile, err)
 	}
+	templates[name].RegisterHelper("each_team", eachTeamHelper)
 	return nil
 }
 
@@ -78,4 +80,26 @@ func execTemplate(name string, req events.Request) (string, error) {
 
 	page, err := tpl.Exec(ctx)
 	return page, err
+}
+
+func eachTeamHelper(memberships map[string][]string, options *Options) string {
+	result := ""
+
+	orgCount := len(memberships)
+	orgs := make([]string, orgCount)
+	idx := 0
+	for key := range memberships {
+		orgs[i] = key
+		idx++
+	}
+	sort.Strings(orgs)
+
+	for idx, key := range orgs {
+		val = memberships[key]
+		sort.Strings(val)
+		data := options.newIterDataFrame(orgCount, idx, key)
+		result += options.evalBlock(val, val, key)
+	}
+
+	return result
 }

@@ -16,7 +16,7 @@
                 {{#if session.memberships}}
                     <p>Your memberships:</p>
                     <ul>
-                        {{#each session.memberships as |teams org|}}
+                        {{#each_team session.memberships as |teams org|}}
                             <li>{{org}}
                                 <ul>
                                     {{#each teams as |team|}}
