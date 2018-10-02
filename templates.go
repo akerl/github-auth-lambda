@@ -82,23 +82,23 @@ func execTemplate(name string, req events.Request) (string, error) {
 	return page, err
 }
 
-func eachTeamHelper(memberships map[string][]string, options *Options) string {
+func eachTeamHelper(memberships map[string][]string, options *raymond.Options) string {
 	result := ""
 
 	orgCount := len(memberships)
 	orgs := make([]string, orgCount)
 	idx := 0
 	for key := range memberships {
-		orgs[i] = key
+		orgs[idx] = key
 		idx++
 	}
 	sort.Strings(orgs)
 
 	for idx, key := range orgs {
-		val = memberships[key]
+		val := memberships[key]
 		sort.Strings(val)
 		data := options.newIterDataFrame(orgCount, idx, key)
-		result += options.evalBlock(val, val, key)
+		result += options.evalBlock(val, data, key)
 	}
 
 	return result
