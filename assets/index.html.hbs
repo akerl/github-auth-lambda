@@ -11,29 +11,29 @@
     <body>
         <div class="content">
             <h1 class="title">OAuth Handler</h1>
-            {% if session.login != "" %}
-                <p>You're already logged in, {{ session.login }}</p>
-                {% if orgs.size > 0 %}
+            {%- if session.Login != "" -%}
+                <p>You're already logged in, {{ session.Login }}</p>
+                {%- if orgs.size > 0 -%}
                     <p>Your memberships:</p>
                     <ul>
-                        {% for org in orgs %}
+                        {%- for org in orgs -%}
                             <li>{{ org }}
                                 <ul>
-                                    {% assign teams = session.memberships[org] | sort %}
-                                    {% for team in teams %}
+                                    {%- assign teams = session.Memberships[org] | sort -%}
+                                    {%- for team in teams -%}
                                         <li>{{ team }}</li>
-                                    {% endfor %}
+                                    {%- endfor -%}
                                 </ul>
                             </li>
-                        {% endfor %}
+                        {%- endfor -%}
                     </ul>
-                {% else %}
+                {%- else -%}
                     <p>You don't seem to have any memberships</p>
-                {% endif %}
+                {%- endif -%}
                 <p><a href="/logout">Click here</a> to log out</p>
-            {% else %}
+            {%- else -%}
                 <a href="/auth">Click here to log in</a>
-            {% endif %}
+            {%- endif -%}
         </div>
     </body>
 </html>

@@ -58,6 +58,7 @@ func newTemplateContext(req events.Request) (map[string]interface{}, error) {
 	idx := 0
 	for org := range session.Memberships {
 		orgs[idx] = org
+		idx++
 	}
 	sort.Strings(orgs)
 
