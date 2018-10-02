@@ -54,9 +54,9 @@ func newTemplateContext(req events.Request) (map[string]interface{}, error) {
 	if err != nil {
 		return map[string]interface{}{}, err
 	}
-
-	orgs := make([]string, len(tcsession.Memberships))
-	for idx, org := range session.Memberships {
+	orgs := make([]string, len(session.Memberships))
+	idx := 0
+	for org := range session.Memberships {
 		orgs[idx] = org
 	}
 	sort.Strings(orgs)
