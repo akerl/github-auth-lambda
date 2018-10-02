@@ -2,19 +2,17 @@ package main
 
 import (
 	"fmt"
-	"sort"
-
-	"github.com/akerl/github-auth-lambda/session"
 
 	"github.com/akerl/go-lambda/apigw/events"
-	"github.com/aymerick/raymond"
+	"gopkg.in/osteele/liquid.v1"
 )
 
 var (
+	engine        *liquid.Engine
 	templateNames = []string{
 		"/index.html",
 	}
-	templates = map[string]*raymond.Template{}
+	templates = map[string]*liquid.Template{}
 )
 
 func loadTemplate(name string) error {
@@ -25,11 +23,10 @@ func loadTemplate(name string) error {
 	if !found {
 		return fmt.Errorf("template not found: %s", tplFile)
 	}
-	templates[name], err = raymond.Parse(tplFile)
+	templates[name], err = engine.ParseString(tplFile)
 	if err != nil {
 		return fmt.Errorf("template failed to parse (%s): %s", tplFile, err)
 	}
-	templates[name].RegisterHelper("each_team", eachTeamHelper)
 	return nil
 }
 
@@ -44,27 +41,30 @@ func loadTemplates() error {
 }
 
 func init() {
+	engine = liquid.NewEngine()
 	err := loadTemplates()
 	if err != nil {
 		panic(err)
 	}
 }
 
-type templateContext struct {
-	Session session.Session
-	Request events.Request
-	Config  map[string]string
-}
-
-func newTemplateContext(req events.Request) (templateContext, error) {
-	tc := templateContext{
-		Request: req,
-		Config:  config.TemplateData,
+func newTemplateContext(req events.Request) (map[string]interface{}, error) {
+	tc := map[string]interface{}{
+		"request": req,
+		"config":  config.TemplateData,
 	}
 
 	var err error
-	tc.Session, err = sm.Read(req)
-	return tc, err
+	tc["session"], err = sm.Read(req)
+	if err != nil {
+		return tc, err
+	}
+	tc["orgs"] = make([]string, len(tc["session"].Memberships))
+	for idx, org := range tc["session"].Memberships {
+		tc["orgs"][idx] = org
+	}
+	sort.Strings(tc["orgs"])
+	return tc, nil
 }
 
 func execTemplate(name string, req events.Request) (string, error) {
@@ -78,28 +78,6 @@ func execTemplate(name string, req events.Request) (string, error) {
 		return "", fmt.Errorf("template does not exist: %s", name)
 	}
 
-	page, err := tpl.Exec(ctx)
+	page, err := tpl.RenderString(ctx)
 	return page, err
-}
-
-func eachTeamHelper(memberships map[string][]string, options *raymond.Options) string {
-	result := ""
-
-	orgCount := len(memberships)
-	orgs := make([]string, orgCount)
-	idx := 0
-	for key := range memberships {
-		orgs[idx] = key
-		idx++
-	}
-	sort.Strings(orgs)
-
-	for idx, key := range orgs {
-		val := memberships[key]
-		sort.Strings(val)
-		data := options.newIterDataFrame(orgCount, idx, key)
-		result += options.evalBlock(val, data, key)
-	}
-
-	return result
 }

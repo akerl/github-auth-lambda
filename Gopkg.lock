@@ -11,7 +11,7 @@
     "s3",
   ]
   pruneopts = "UT"
-  revision = "f7504567bd3a249beeb2ab142a7e305ad5ebf59c"
+  revision = "6c84ebeb32a15e5757d47b5c7f54d811c60156a7"
 
 [[projects]]
   digest = "1:014e79cf5c422dd0547a87bde33c7f7b3cd29116a96fac8897c7e50f18531dea"
@@ -65,19 +65,6 @@
   pruneopts = "UT"
   revision = "53e36ebb6b2c26d228ba9563d06caf306227f110"
   version = "v1.15.46"
-
-[[projects]]
-  digest = "1:4333e9d9cc731d01e67e19c33da46e95860b95f8b8032bc586d69b169e1b0c1b"
-  name = "github.com/aymerick/raymond"
-  packages = [
-    ".",
-    "ast",
-    "lexer",
-    "parser",
-  ]
-  pruneopts = "UT"
-  revision = "2eebd0f5dd9564c0c6e439df11d8a3c7b9b9ab11"
-  version = "v2.0.2"
 
 [[projects]]
   digest = "1:2cd7915ab26ede7d95b8749e6b1f933f1c6d5398030684e6505940a10f31cfda"
@@ -143,6 +130,29 @@
   revision = "0b12d6b5"
 
 [[projects]]
+  digest = "1:9efd8e7a30aa7ccf114dc1097180d8bd84a932ed0903948880bb75e5bc89ccbd"
+  name = "github.com/osteele/liquid"
+  packages = [
+    "expressions",
+    "filters",
+    "parser",
+    "render",
+    "tags",
+    "values",
+  ]
+  pruneopts = "UT"
+  revision = "e0ae1590bfe2584ce1146f3238f0a4f055b7fd3f"
+  version = "v1.2.4"
+
+[[projects]]
+  digest = "1:914ebae4a550d3979fa366abba0762341e8f31bb94aa2d0980c8ea58f00ee2f2"
+  name = "github.com/osteele/tuesday"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "4f30e814e39a8c811712a37dc9cc9f51cdb17b7c"
+  version = "v1.0.3"
+
+[[projects]]
   branch = "master"
   digest = "1:d6b719875cf8091fbab38527d81d34e71f4521b9ee9ccfbd4a32cff2ac5af96e"
   name = "golang.org/x/net"
@@ -182,6 +192,14 @@
   version = "v1.2.0"
 
 [[projects]]
+  digest = "1:aced654a37f81e3023ef57cf85597a80a80f1319212423d299a77e3aa8af5b78"
+  name = "gopkg.in/osteele/liquid.v1"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "e0ae1590bfe2584ce1146f3238f0a4f055b7fd3f"
+  version = "v1.2.4"
+
+[[projects]]
   digest = "1:342378ac4dcb378a5448dd723f0784ae519383532f5e70ade24132c4c8693202"
   name = "gopkg.in/yaml.v2"
   packages = ["."]
@@ -196,12 +214,12 @@
     "github.com/akerl/go-lambda/apigw/events",
     "github.com/akerl/go-lambda/mux",
     "github.com/akerl/go-lambda/s3",
-    "github.com/aymerick/raymond",
     "github.com/google/go-github/github",
     "github.com/google/uuid",
     "github.com/gorilla/securecookie",
     "golang.org/x/oauth2",
     "golang.org/x/oauth2/github",
+    "gopkg.in/osteele/liquid.v1",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1
