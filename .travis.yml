@@ -4,8 +4,11 @@ services:
 - docker
 env:
   global:
+  - PATH=$HOME/.local/bin:$PATH
   - PKGFORGE_STATEFILE=/tmp/pkgforge
   - BUCKET=akerl-github-auth-lambda
+before_install:
+- pip install --user awscli
 script: make
 deploy:
   provider: script
