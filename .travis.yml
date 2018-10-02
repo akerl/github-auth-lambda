@@ -14,8 +14,7 @@ deploy:
   provider: script
   script:
   - make release || travis_terminate 1
-  - aws s3 cp pkg/payload.zip "s3://$BUCKET/lambdas/payload-$TRAVIS_TAG.zip" || travis_terminate
-    1
+  - aws s3 cp pkg/payload.zip "s3://$BUCKET/lambdas/payload-$TRAVIS_TAG.zip" || travis_terminate 1
   skip_cleanup: true
   on:
     tags: true
