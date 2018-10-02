@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"sort"
 
 	"github.com/akerl/go-lambda/apigw/events"
 	"gopkg.in/osteele/liquid.v1"
