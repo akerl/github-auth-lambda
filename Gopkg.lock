@@ -11,7 +11,7 @@
     "s3",
   ]
   pruneopts = "UT"
-  revision = "5f7b2c53cbd1f3be86c5dd29b542ac9f9cadf9b7"
+  revision = "40e0569d25ee95dd0d7ac22db4da9bb1e56bc570"
 
 [[projects]]
   digest = "1:014e79cf5c422dd0547a87bde33c7f7b3cd29116a96fac8897c7e50f18531dea"
@@ -162,7 +162,7 @@
     "context/ctxhttp",
   ]
   pruneopts = "UT"
-  revision = "68fc911561ed0cb104e22deafa05515909b706ab"
+  revision = "146acd28ed5894421fb5aac80ca93bc1b1f46f87"
 
 [[projects]]
   branch = "master"
