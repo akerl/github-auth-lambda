@@ -3,7 +3,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:ceaa17cfa8a9fa791b8873d92efbb6dd4deaf6d258d64673b849400ea5b3bb81"
+  digest = "1:c31a071a0fb8de9c89d3b76be9f9dbb0ecbc364b5fa5e5ad1c3cbe0e1e46c3f1"
   name = "github.com/akerl/go-lambda"
   packages = [
     "apigw/events",
@@ -11,7 +11,7 @@
     "s3",
   ]
   pruneopts = "UT"
-  revision = "3d686b1b05dcb858394e03e5e0fffe3b7f5eecc8"
+  revision = "a86234f24e2eefc590d93362fb01c1426965ac18"
 
 [[projects]]
   digest = "1:014e79cf5c422dd0547a87bde33c7f7b3cd29116a96fac8897c7e50f18531dea"
@@ -27,7 +27,7 @@
   version = "v1.6.0"
 
 [[projects]]
-  digest = "1:0dc362730c276c0a3c975349ef5f27e621930e4cf189e687fd8bd51aa926b3e7"
+  digest = "1:bc2410ad4d4fb637698c3c71d514cdf38a43a8c5f83c3c415af1925e426abdc5"
   name = "github.com/aws/aws-sdk-go"
   packages = [
     "aws",
@@ -64,8 +64,8 @@
     "service/sts",
   ]
   pruneopts = "UT"
-  revision = "dd947f47decb37a7c3bee72501bfc790701ab5ad"
-  version = "v1.15.50"
+  revision = "bf8067ceb6e7f51e150c218972dccfeeed892b85"
+  version = "v1.15.54"
 
 [[projects]]
   digest = "1:2cd7915ab26ede7d95b8749e6b1f933f1c6d5398030684e6505940a10f31cfda"
@@ -76,12 +76,12 @@
   version = "v1.0.0"
 
 [[projects]]
-  digest = "1:b98e7574fc27ec166fb31195ec72c3bd0bffd73926d3612eb4c929bc5236f75b"
+  digest = "1:15e27372d379b45b18ac917b9dafc45c45485239490ece18cca97a12f9591146"
   name = "github.com/go-ini/ini"
   packages = ["."]
   pruneopts = "UT"
-  revision = "7b294651033cd7d9e7f0d9ffa1b75ed1e198e737"
-  version = "v1.38.3"
+  revision = "9c8236e659b76e87bf02044d06fde8683008ff3e"
+  version = "v1.39.0"
 
 [[projects]]
   digest = "1:97df918963298c287643883209a2c3f642e6593379f97ab400c2a2e219ab647d"
@@ -162,7 +162,7 @@
     "context/ctxhttp",
   ]
   pruneopts = "UT"
-  revision = "146acd28ed5894421fb5aac80ca93bc1b1f46f87"
+  revision = "49bb7cea24b1df9410e1712aa6433dae904ff66a"
 
 [[projects]]
   branch = "master"
