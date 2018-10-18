@@ -11,7 +11,7 @@
     "s3",
   ]
   pruneopts = "UT"
-  revision = "a86234f24e2eefc590d93362fb01c1426965ac18"
+  revision = "0b58b243d26288a8aa992aa4b18b9fec6c3c1fa8"
 
 [[projects]]
   digest = "1:014e79cf5c422dd0547a87bde33c7f7b3cd29116a96fac8897c7e50f18531dea"
@@ -27,7 +27,7 @@
   version = "v1.6.0"
 
 [[projects]]
-  digest = "1:bc2410ad4d4fb637698c3c71d514cdf38a43a8c5f83c3c415af1925e426abdc5"
+  digest = "1:b75da992f409ab285c5c2d57869d3df50e1d6869d25bee46bb04571a81db53d9"
   name = "github.com/aws/aws-sdk-go"
   packages = [
     "aws",
@@ -64,8 +64,8 @@
     "service/sts",
   ]
   pruneopts = "UT"
-  revision = "bf8067ceb6e7f51e150c218972dccfeeed892b85"
-  version = "v1.15.54"
+  revision = "66832f7f150914a46ffbfc03210f3b9cb0e4c005"
+  version = "v1.15.57"
 
 [[projects]]
   digest = "1:2cd7915ab26ede7d95b8749e6b1f933f1c6d5398030684e6505940a10f31cfda"
@@ -162,11 +162,11 @@
     "context/ctxhttp",
   ]
   pruneopts = "UT"
-  revision = "49bb7cea24b1df9410e1712aa6433dae904ff66a"
+  revision = "04a2e542c03f1d053ab3e4d6e5abcd4b66e2be8e"
 
 [[projects]]
   branch = "master"
-  digest = "1:1ad0746c59519b759facab5468e5e016f163fc8043628c0123574798f01f753c"
+  digest = "1:908c9fc10f266c629423f62bb351c2f508848b03ad9a8cb6b42209a4a0dc6077"
   name = "golang.org/x/oauth2"
   packages = [
     ".",
@@ -174,7 +174,7 @@
     "internal",
   ]
   pruneopts = "UT"
-  revision = "c57b0facaced709681d9f90397429b9430a74754"
+  revision = "9dcd33a902f40452422c2367fefcb95b54f9f8f8"
 
 [[projects]]
   digest = "1:6247f76e55a1e1a5c19a81e2d4b4dff6730461eeb5bbb0a16dd4a8ec8637ee93"
