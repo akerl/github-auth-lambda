@@ -8,7 +8,6 @@ import (
 	"log"
 
 	"github.com/akerl/github-auth-lambda/session"
-
 	"github.com/akerl/go-lambda/apigw/events"
 	"github.com/google/go-github/github"
 	"github.com/google/uuid"

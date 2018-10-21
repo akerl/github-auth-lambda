@@ -4,7 +4,6 @@ import (
 	"regexp"
 
 	"github.com/akerl/github-auth-lambda/session"
-
 	"github.com/akerl/go-lambda/mux"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/github"
