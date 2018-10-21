@@ -3,7 +3,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:c31a071a0fb8de9c89d3b76be9f9dbb0ecbc364b5fa5e5ad1c3cbe0e1e46c3f1"
+  digest = "1:290df874b2158d783b9bf5763ff5b424eb2b7cd6ccc2ac4aa8ee0f33d5caa552"
   name = "github.com/akerl/go-lambda"
   packages = [
     "apigw/events",
@@ -11,7 +11,7 @@
     "s3",
   ]
   pruneopts = "UT"
-  revision = "a7b7e6eeabc39f38aa91fef22a39133f070b9e76"
+  revision = "0dbc7a79623322cb57d0875ce50370d1f0c9954e"
 
 [[projects]]
   digest = "1:014e79cf5c422dd0547a87bde33c7f7b3cd29116a96fac8897c7e50f18531dea"
@@ -27,7 +27,7 @@
   version = "v1.6.0"
 
 [[projects]]
-  digest = "1:18dd2504659eeeb0488252663e8217bb5c2d331e4e40b7767aa8bb030866f46b"
+  digest = "1:85f3bccc7292a62782e0c698baf743e1ac6ac946035e1449fc0c50b19f8a642f"
   name = "github.com/aws/aws-sdk-go"
   packages = [
     "aws",
@@ -47,6 +47,7 @@
     "aws/request",
     "aws/session",
     "aws/signer/v4",
+    "internal/ini",
     "internal/s3err",
     "internal/sdkio",
     "internal/sdkrand",
@@ -64,8 +65,8 @@
     "service/sts",
   ]
   pruneopts = "UT"
-  revision = "2324d8a7db41970a80d19791bd30b94f632ce0cc"
-  version = "v1.15.58"
+  revision = "c0037b52736b07cea4e0cb6521f7995adef833bc"
+  version = "v1.15.59"
 
 [[projects]]
   digest = "1:2cd7915ab26ede7d95b8749e6b1f933f1c6d5398030684e6505940a10f31cfda"
@@ -74,14 +75,6 @@
   pruneopts = "UT"
   revision = "0ca9ea5df5451ffdf184b4428c902747c2c11cd7"
   version = "v1.0.0"
-
-[[projects]]
-  digest = "1:15e27372d379b45b18ac917b9dafc45c45485239490ece18cca97a12f9591146"
-  name = "github.com/go-ini/ini"
-  packages = ["."]
-  pruneopts = "UT"
-  revision = "9c8236e659b76e87bf02044d06fde8683008ff3e"
-  version = "v1.39.0"
 
 [[projects]]
   digest = "1:97df918963298c287643883209a2c3f642e6593379f97ab400c2a2e219ab647d"
