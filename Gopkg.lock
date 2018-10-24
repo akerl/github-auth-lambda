@@ -11,7 +11,7 @@
     "s3",
   ]
   pruneopts = "UT"
-  revision = "0dbc7a79623322cb57d0875ce50370d1f0c9954e"
+  revision = "692ce0608ae10f2f88114a9e171bd163114f9ea9"
 
 [[projects]]
   digest = "1:014e79cf5c422dd0547a87bde33c7f7b3cd29116a96fac8897c7e50f18531dea"
@@ -27,7 +27,7 @@
   version = "v1.6.0"
 
 [[projects]]
-  digest = "1:85f3bccc7292a62782e0c698baf743e1ac6ac946035e1449fc0c50b19f8a642f"
+  digest = "1:55c81eaa25440b8571b65a6b16619f66ab67f9b8e4706f82374c117d6789f0f1"
   name = "github.com/aws/aws-sdk-go"
   packages = [
     "aws",
@@ -65,8 +65,8 @@
     "service/sts",
   ]
   pruneopts = "UT"
-  revision = "c0037b52736b07cea4e0cb6521f7995adef833bc"
-  version = "v1.15.59"
+  revision = "9a79cc876234949427d966249a09fc98e7864bde"
+  version = "v1.15.61"
 
 [[projects]]
   digest = "1:2cd7915ab26ede7d95b8749e6b1f933f1c6d5398030684e6505940a10f31cfda"
@@ -155,7 +155,7 @@
     "context/ctxhttp",
   ]
   pruneopts = "UT"
-  revision = "04a2e542c03f1d053ab3e4d6e5abcd4b66e2be8e"
+  revision = "9b4f9f5ad5197c79fd623a3638e70d8b26cef344"
 
 [[projects]]
   branch = "master"
