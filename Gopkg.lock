@@ -11,7 +11,7 @@
     "s3",
   ]
   pruneopts = "UT"
-  revision = "7da3989a6f81d5ed646f6ea5628e0195ed23a02e"
+  revision = "a5eb7e6f5f9ff3357a077cddd34f23d7e1b42ac5"
 
 [[projects]]
   digest = "1:a4fae639114a906f205a4cb858c670ca28784426c0e809d664de2babb13cb28c"
@@ -144,11 +144,11 @@
     "context/ctxhttp",
   ]
   pruneopts = "UT"
-  revision = "adae6a3d119ae4890b46832a2e88a95adc62b8e7"
+  revision = "fae4c4e3ad76c295c3d6d259f898136b4bf833a8"
 
 [[projects]]
   branch = "master"
-  digest = "1:08c8fcebd2a3a7c2bf415eda56222087d4c1aabf6fe4f81ed8640fcb5e3d3ecf"
+  digest = "1:1c4b665196466be9dbbf40509c917964d929d220fcf41e9ca138ca0931452048"
   name = "golang.org/x/oauth2"
   packages = [
     ".",
@@ -156,7 +156,7 @@
     "internal",
   ]
   pruneopts = "UT"
-  revision = "8f65e3013ebad444f13bc19536f7865efc793816"
+  revision = "28207608b83849a028d4f12e46533a6b6894ecaf"
 
 [[projects]]
   digest = "1:08206298775e5b462e6c0333f4471b44e63f1a70e42952b6ede4ecc9572281eb"
@@ -183,12 +183,12 @@
   version = "v1.2.4"
 
 [[projects]]
-  digest = "1:342378ac4dcb378a5448dd723f0784ae519383532f5e70ade24132c4c8693202"
+  digest = "1:4d2e5a73dc1500038e504a8d78b986630e3626dc027bc030ba5c75da257cdb96"
   name = "gopkg.in/yaml.v2"
   packages = ["."]
   pruneopts = "UT"
-  revision = "5420a8b6744d3b0345ab293f6fcba19c978f1183"
-  version = "v2.2.1"
+  revision = "51d6538a90f86fe93ac480b35f37b2be17fef232"
+  version = "v2.2.2"
 
 [solve-meta]
   analyzer-name = "dep"
