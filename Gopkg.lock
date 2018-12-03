@@ -144,11 +144,11 @@
     "context/ctxhttp",
   ]
   pruneopts = "UT"
-  revision = "fae4c4e3ad76c295c3d6d259f898136b4bf833a8"
+  revision = "351d144fa1fc0bd934e2408202be0c29f25e35a0"
 
 [[projects]]
   branch = "master"
-  digest = "1:1c4b665196466be9dbbf40509c917964d929d220fcf41e9ca138ca0931452048"
+  digest = "1:932aea8a7acd301484058f913d4b209bc8c9dc64ea99fd3fbbb2f75c02e3cd46"
   name = "golang.org/x/oauth2"
   packages = [
     ".",
@@ -156,7 +156,7 @@
     "internal",
   ]
   pruneopts = "UT"
-  revision = "28207608b83849a028d4f12e46533a6b6894ecaf"
+  revision = "d668ce993890a79bda886613ee587a69dd5da7a6"
 
 [[projects]]
   digest = "1:08206298775e5b462e6c0333f4471b44e63f1a70e42952b6ede4ecc9572281eb"
