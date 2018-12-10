@@ -11,10 +11,10 @@
     "s3",
   ]
   pruneopts = "UT"
-  revision = "a5eb7e6f5f9ff3357a077cddd34f23d7e1b42ac5"
+  revision = "6312da0070efc7e22ae4832159b528b1b6510840"
 
 [[projects]]
-  digest = "1:a4fae639114a906f205a4cb858c670ca28784426c0e809d664de2babb13cb28c"
+  digest = "1:8b4d009bfb2d13472dad368bf7520c482dd7f8a190436da4e6d52111c0a2e697"
   name = "github.com/aws/aws-lambda-go"
   packages = [
     "events",
@@ -23,11 +23,11 @@
     "lambdacontext",
   ]
   pruneopts = "UT"
-  revision = "fb8f88d824489a878aee1e0badde7d8e129f8767"
-  version = "v1.7.0"
+  revision = "9e3676ee8ca83aee500682f382e10b9d03660093"
+  version = "v1.8.0"
 
 [[projects]]
-  digest = "1:4d4e43dde8f1abbef98f5e0e7e4fd6f0e98cbb81d3407cfb3b9aee6fcbf877d1"
+  digest = "1:303a306cefbdb62f9f65e89e841624dff2acae2fc32639b0432b6d4a42d762fc"
   name = "github.com/aws/aws-sdk-go-v2"
   packages = [
     "aws",
@@ -54,8 +54,8 @@
     "service/sts",
   ]
   pruneopts = "UT"
-  revision = "d52522b5f4b95591ff6528d7c54923951aadf099"
-  version = "v2.0.0-preview.5"
+  revision = "0143dbcf72cf30047f4830d714f7511e74d44034"
+  version = "v0.6.0"
 
 [[projects]]
   digest = "1:2cd7915ab26ede7d95b8749e6b1f933f1c6d5398030684e6505940a10f31cfda"
@@ -144,7 +144,7 @@
     "context/ctxhttp",
   ]
   pruneopts = "UT"
-  revision = "351d144fa1fc0bd934e2408202be0c29f25e35a0"
+  revision = "610586996380ceef02dd726cc09df7e00a3f8e56"
 
 [[projects]]
   branch = "master"
