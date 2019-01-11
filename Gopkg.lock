@@ -11,10 +11,10 @@
     "s3",
   ]
   pruneopts = "UT"
-  revision = "8692f6de4730d4240b2017327037bd17c98650df"
+  revision = "40cb4bcd13d9167d6a16c0713c3266a4f0a7b79f"
 
 [[projects]]
-  digest = "1:8b4d009bfb2d13472dad368bf7520c482dd7f8a190436da4e6d52111c0a2e697"
+  digest = "1:3c1b2a3b4f61355c883f878b5754bc27c0d159151cf84fbe21913756d74f539c"
   name = "github.com/aws/aws-lambda-go"
   packages = [
     "events",
@@ -23,8 +23,8 @@
     "lambdacontext",
   ]
   pruneopts = "UT"
-  revision = "9e3676ee8ca83aee500682f382e10b9d03660093"
-  version = "v1.8.0"
+  revision = "928161204cad89472f9e6b5dd49ce16bc91230de"
+  version = "v1.8.1"
 
 [[projects]]
   digest = "1:303a306cefbdb62f9f65e89e841624dff2acae2fc32639b0432b6d4a42d762fc"
@@ -144,11 +144,11 @@
     "context/ctxhttp",
   ]
   pruneopts = "UT"
-  revision = "927f97764cc334a6575f4b7a1584a147864d5723"
+  revision = "915654e7eabcea33ae277abbecf52f0d8b7a9fdc"
 
 [[projects]]
   branch = "master"
-  digest = "1:932aea8a7acd301484058f913d4b209bc8c9dc64ea99fd3fbbb2f75c02e3cd46"
+  digest = "1:48cd81c20f258b151028ccab0638baddc3de16f9fadfa4b7cb8c7075274d01df"
   name = "golang.org/x/oauth2"
   packages = [
     ".",
@@ -156,7 +156,7 @@
     "internal",
   ]
   pruneopts = "UT"
-  revision = "d668ce993890a79bda886613ee587a69dd5da7a6"
+  revision = "fd3eaa146cbb5c89ce187c275fb79bd3a36a5ffc"
 
 [[projects]]
   digest = "1:6f3bd49ddf2e104e52062774d797714371fac1b8bddfd8e124ce78e6b2264a10"
