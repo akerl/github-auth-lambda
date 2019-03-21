@@ -8,6 +8,6 @@ require (
 	github.com/omeid/go-resources v0.0.0-20171025031226-ca9993b7d1a4 // indirect
 	github.com/osteele/liquid v1.2.4 // indirect
 	github.com/osteele/tuesday v1.0.3 // indirect
-	golang.org/x/oauth2 v0.0.0-20190226205417-e64efc72b421
+	golang.org/x/oauth2 v0.0.0-20190319182350-c85d3e98c914
 	gopkg.in/osteele/liquid.v1 v1.2.4
 )
