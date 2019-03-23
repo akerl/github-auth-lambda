@@ -12,7 +12,9 @@ env:
   - secure: C4Dlm3HxKjEKUoVXoKy/2sYJtaloIQX0AvByz1X42z5TL0WvBqr6sAoPOuLpszrD1U2hXZerCP+j3pl0tg1sS6Pgm1a6QbzQG+0foq4wl+MroGWQkNv99l+wLdwj+ueJitww4eFD1bahN0ZO/gjcgYXReA6nrY/UeUjJ2oy5KWGzoLpm/W8PUMMUY/Qsaw0nSfu3+mGqeHdFd7iJSD1lUHdJOByc6v/G9lj/dTVFRbqeUf/6nRrEMu8dZxOGosO13snAE9uXOcQM6tdNqYrlfwIAlIq564i2gz9yYbsRH4+7m1X0dHEHzE9/1U/DBvk1J9fot2Dz2kGCfkstzZ6MY59eauIB8A7ZMGTTVPhsaKudKZ1urLU3AM45WLjzH/UA2RVSJJbp40IrDKcR8C2zU9Xd6/7Tyta2A/a6Se1JIYNp9eok/qfNrxEbSeqfHQEP55CqZSm8xYpiVKr4FD7TB1a6bepOZX92dRYGRM/BaBco7dSxDKPdh9a3x0Mf6+c6DmdYC/Yg0YP6EKhfsF0lrNia5YzHsJI72pADi3jB4qPG3OH0ppy9jnyhTDEZ7tjbAFw4UnLYwNf0vJQcEatIafvzlkC6pI0NggUCHQwJP6XREARRx+hNMQpCUwYWKC3NbfdfAafld6pigZ4zZb16wzt77j5YZHir+VYZIS69WgY=
 before_install:
 - pip install --user awscli
-script: make
+script:
+- make
+- wc -l .github
 deploy:
   provider: script
   script: make release && aws s3 cp pkg/payload.zip "s3://$BUCKET/$TRAVIS_TAG.zip"
