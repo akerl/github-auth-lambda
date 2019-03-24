@@ -2,5 +2,5 @@
 
 set -xeuo pipefail
 
-go get github.com/omeid/go-resources/cmd/resources
+go get github.com/akerl/go-resources/cmd/resources
 go generate

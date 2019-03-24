@@ -12,7 +12,7 @@ import (
 type SessionCheck struct {
 	SessionManager session.Manager
 	AuthURL        string
-	AclHandler     func(events.Request, session.Session) (bool, error)
+	ACLHandler     func(events.Request, session.Session) (bool, error)
 }
 
 // AuthFunc checks for valid auth using GitHub OAuth
@@ -40,7 +40,7 @@ func (sc *SessionCheck) AuthFunc(req events.Request) (events.Response, error) {
 		return events.Redirect(authURL.String(), 303)
 	}
 
-	allowed, err := sc.AclHandler(req, sess)
+	allowed, err := sc.ACLHandler(req, sess)
 	if err != nil {
 		return events.Fail("failed to authenticate request")
 	}

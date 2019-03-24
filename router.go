@@ -33,8 +33,9 @@ func success(req events.Request, sess session.Session) (events.Response, error) 
 }
 
 func redirect(req events.Request, sess session.Session, target string) (events.Response, error) {
-	if target == "" {
-		target = "https://" + req.Headers["Host"]
+	respTarget := target
+	if respTarget == "" {
+		respTarget = "https://" + req.Headers["Host"]
 	}
 
 	cookie, err := sm.Write(sess)
@@ -45,7 +46,7 @@ func redirect(req events.Request, sess session.Session, target string) (events.R
 	return events.Response{
 		StatusCode: 303,
 		Headers: map[string]string{
-			"Location":   target,
+			"Location":   respTarget,
 			"Set-Cookie": cookie,
 		},
 	}, nil

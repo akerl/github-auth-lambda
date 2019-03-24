@@ -1,6 +1,8 @@
 cloud.google.com/go v0.34.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMTw=
 github.com/akerl/go-lambda v0.1.0 h1:znaUi5ghiIRtnEcVY4zUZhW7tz7IxxVjRgwFWkFTMbY=
 github.com/akerl/go-lambda v0.1.0/go.mod h1:vyT/70Td9NXHw2U6y+FELwC4r1gZLlt3VwQfmLOoG+c=
+github.com/akerl/go-resources v0.0.0-20190324001828-2629d65f497f h1:U8/oCo1gQlDOHnmAtc91QrPetZl70xuRzlSqOICtbFo=
+github.com/akerl/go-resources v0.0.0-20190324001828-2629d65f497f/go.mod h1:kTD1nW2bNr87kMBl4Q/4tmKjb/C04vybCy0Wtgixk6M=
 github.com/aws/aws-lambda-go v1.8.1 h1:nHBpP6XC30bwF6qWKrw/BrK2A8i4GKmSZzajTBIJS4A=
 github.com/aws/aws-lambda-go v1.8.1/go.mod h1:zUsUQhAUjYzR8AuduJPCfhBuKWUaDbQiPOG+ouzmE1A=
 github.com/aws/aws-sdk-go-v2 v0.7.0 h1:a5xRI/tBmUFKuAA0SOyEY2P1YhQb+jVOEI9P/7KfrP0=
@@ -25,8 +27,6 @@ github.com/gucumber/gucumber v0.0.0-20180127021336-7d5c79e832a2/go.mod h1:YbdHRK
 github.com/jmespath/go-jmespath v0.0.0-20180206201540-c2b33e8439af h1:pmfjZENx5imkbgOkpRUYLnmbU7UEFbjtDA2hxJ1ichM=
 github.com/jmespath/go-jmespath v0.0.0-20180206201540-c2b33e8439af/go.mod h1:Nht3zPeWKUH0NzdCt2Blrr5ys8VGpn0CEB0cQHVjt7k=
 github.com/nlopes/slack v0.5.0/go.mod h1:jVI4BBK3lSktibKahxBF74txcK2vyvkza1z/+rRnVAM=
-github.com/omeid/go-resources v0.0.0-20171025031226-ca9993b7d1a4 h1:Uv6HZs0LhOEByIbxsZ+Ph0hMAfrv+aCkqhZpKVCY5wU=
-github.com/omeid/go-resources v0.0.0-20171025031226-ca9993b7d1a4/go.mod h1:SIESmZeFlCKsQZcd2NEiX8spNNmCWB1V/RbM/eBKDfo=
 github.com/osteele/liquid v1.2.4 h1:ydm/FoHn/cStyN7Fpar4L/ClyRKc9rZ+Qzb+S3OMOT4=
 github.com/osteele/liquid v1.2.4/go.mod h1:jhgMyQFVoV0grH2MKvpMbgxFSBezOoXUbgiwnYrKJ2c=
 github.com/osteele/tuesday v1.0.3 h1:SrCmo6sWwSgnvs1bivmXLvD7Ko9+aJvvkmDjB5G4FTU=
