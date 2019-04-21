@@ -5,7 +5,7 @@ go 1.12
 require (
 	github.com/akerl/go-lambda v0.1.0
 	github.com/akerl/go-resources v0.0.0-20190324001828-2629d65f497f // indirect
-	github.com/google/go-github/v24 v24.0.1
+	github.com/google/go-github/v25 v25.0.1
 	github.com/google/uuid v1.1.1
 	github.com/gorilla/securecookie v1.1.1
 	github.com/osteele/liquid v1.2.4 // indirect
