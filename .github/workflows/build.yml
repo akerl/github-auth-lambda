@@ -16,8 +16,18 @@ jobs:
       uses: actions/checkout@v3
       with:
         submodules: recursive
+    - name: Install AWS CLI
+      run: pip install --user awscli
     - name: Build
       run: make
+    - name: Publish
+      if: startsWith(github.ref, 'refs/tags/')
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: us-east-1
+        BUCKET: akerl-githubauthlambda
+      run: aws s3 cp pkg/payload.zip "s3://$BUCKET/$GITHUB_REF_NAME.zip"
     - name: Release
       if: startsWith(github.ref, 'refs/tags/')
       run: make release
