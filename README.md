@@ -1,7 +1,7 @@
 github-auth-lambda
 =========
 
-[![GitHub Workflow Status](https://img.shields.io/actions/github/workflow/status/akerl/github-auth-lambda/build.yml?branch=main)](https://github.com/akerl/github-auth-lambda/actions)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/akerl/github-auth-lambda/build.yml?branch=main)](https://github.com/akerl/github-auth-lambda/actions)
 [![GitHub release](https://img.shields.io/github/release/akerl/github-auth-lambda.svg)](https://github.com/akerl/github-auth-lambda/releases)
 [![MIT Licensed](https://img.shields.io/badge/license-MIT-green.svg)](https://tldrlegal.com/license/mit-license)
 
