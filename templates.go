@@ -5,7 +5,7 @@ import (
 	"sort"
 
 	"github.com/akerl/go-lambda/apigw/events"
-	liquid "gopkg.in/osteele/liquid.v1"
+	"github.com/osteele/liquid"
 )
 
 var (
