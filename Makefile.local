@@ -1,2 +1,2 @@
 PACKAGE = github-auth-lambda
-OSARCHLIST = linux/amd64
+OSARCHLIST = linux/arm64
