@@ -92,7 +92,7 @@ type FileInfo struct {
 	mode    os.FileMode
 	modTime time.Time
 	isDir   bool
-	sys     interface{}
+	sys     any
 
 	files []os.FileInfo
 }
@@ -128,7 +128,7 @@ func (f *FileInfo) Readdir(_ int) ([]os.FileInfo, error) {
 }
 
 // Sys returns the underlying value.
-func (f *FileInfo) Sys() interface{} {
+func (f *FileInfo) Sys() any {
 	return f.sys
 }
 

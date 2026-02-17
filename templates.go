@@ -49,10 +49,10 @@ func init() {
 	}
 }
 
-func newTemplateContext(req events.Request) (map[string]interface{}, error) {
+func newTemplateContext(req events.Request) (map[string]any, error) {
 	session, err := sm.Read(req)
 	if err != nil {
-		return map[string]interface{}{}, err
+		return map[string]any{}, err
 	}
 	orgs := make([]string, len(session.Memberships))
 	idx := 0
@@ -62,7 +62,7 @@ func newTemplateContext(req events.Request) (map[string]interface{}, error) {
 	}
 	sort.Strings(orgs)
 
-	tc := map[string]interface{}{
+	tc := map[string]any{
 		"request": req,
 		"config":  config.TemplateData,
 		"session": session,
